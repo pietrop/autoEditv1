@@ -1,0 +1,52 @@
+<%= form_for(@transcript, html: {multipart: true}) do |f| %>
+  <% if @transcript.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transcript.errors.count, "error") %> prohibited this transcript from being saved:</h2>
+
+      <ul>
+      <% @transcript.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+ <div class="field">
+    <%= f.label :transcript_name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+   <div class="form-group">
+    <%= f.label :sbv_file %><br>
+    <%= file_field_tag :sbv_file , class: 'form-control' %>
+    <span class="help-block">.sbv transcription file from youtube</span>
+  </div>
+
+  <div class="field">
+    <%= f.label :filename %><br>
+    <%= f.text_field :filename %>
+  </div>
+  <div class="field">
+    <%= f.label :speakername %><br>
+    <%= f.text_field :speakername %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br>
+    <%= f.text_field :date %>
+  </div>
+  <div class="field">
+    <%= f.label :youtubeurl %><br>
+    <%= f.text_field :youtubeurl %>
+  </div>
+  <div class="field">
+    <%= f.label :reel %><br>
+    <%= f.text_field :reel %>
+  </div>
+  <div class="field">
+    <%= f.label :tc_meta %><br>
+    <%= f.text_field :tc_meta %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

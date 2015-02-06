@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tc in:</strong>
+  <%= @line.tc_in %>
+</p>
+
+<p>
+  <strong>Tc out:</strong>
+  <%= @line.tc_out %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @line.text %>
+</p>
+
+<p>
+  <strong>N:</strong>
+  <%= @line.n %>
+</p>
+
+<p>
+  <strong>Note:</strong>
+  <%= @line.note %>
+</p>
+
+<p>
+  <strong>Tag:</strong>
+  <%= @line.tag %>
+</p>
+
+<p>
+  <strong>Transcript:</strong>
+  <%= @line.transcript %>
+</p>
+
+<%= link_to 'Edit', edit_line_path(@line) %> |
+<%= link_to 'Back', lines_path %>

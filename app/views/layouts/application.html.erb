@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>autoEdit</title>
+  <%= stylesheet_link_tag  "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<%= favicon_link_tag 'favicon.ico' %>
+
+</head>
+<body>
+  <!--  Cosmo Nav bar -->
+<div class="navbar navbar-default">
+                  <div class="navbar-header">
+                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">autoEdit</a>
+                  </div>
+                  <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    <ul class="nav navbar-nav">
+                      <li><%= link_to ' Transcripts', transcripts_path %></li>
+                      <li><%= link_to 'Paperedits', paperedits_path %></li>
+                      <li> <%= link_to 'New Transcript', new_transcript_path %></li>
+                      <li> <%= link_to 'New Paperedit', new_paperedit_path %></li>
+                    </ul>
+                     <ul class="nav navbar-nav navbar-right">
+                         <ul class="nav navbar-nav">
+                        
+                        <li><%= link_to 'Features', 'features_path' %></li>
+                        <li><%= link_to 'Sign In', "#" %></li>
+                        <li><%= link_to 'Sign Up', "#" %></li>
+                        <li><%= link_to 'Sign Out',"#" %></li>
+                         </ul>
+                    </ul>
+                  </div><!-- /.nav-collapse -->
+              </div>
+<!-- End of   Cosmo Nav bar -->
+	<div class="container">
+
+		<%= yield %>
+
+	</div>
+
+</body>
+</html>

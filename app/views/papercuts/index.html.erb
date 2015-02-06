@@ -1,0 +1,284 @@
+    <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+      $tabs = $(".table");
+      $('.tabs a').click(function(e) {
+          e.preventDefault();
+          $(this).tab('show');
+      })
+      
+      $( "tbody.connectedSortable" ).sortable({
+              connectWith: ".connectedSortable",
+              items: "> tr:not(:first)",
+              appendTo: $tabs,
+              helper:"clone",
+              zIndex: 999990,
+              start: function(){ $tabs.addClass("dragging") },
+              stop: function(){ $tabs.removeClass("dragging")
+               ////////////////////////////////////////////,
+               //  $table_to_update =   $tab_items.prevObject.get(2).innerText, //////////////////////
+             // $table_to_update =   $tab_items.prevObject.get(2).innerHTML,
+             ///////////////GETTING PAPER EDIT NUMBER ID
+              pathname = window.location.pathname;
+              $PaperEditID = pathname.match(/\d/)[0];
+              //////////////END OF GETTING PAPER EDIT NUMBER ID
+              /////////NUMBER OF LINES
+              $nOfRows = $tab_items.prevObject.get(2).rows.length -1,
+              ///LINE ID 
+              // $ArrayOfROws=   $.makeArray($tab_items.prevObject.get(2).rows)
+             $lineId = $tab_items.prevObject.get(2).rows[1].cells[0].id,
+             $rows = $tab_items.prevObject.get(2).rows,
+             $n =0,
+
+             //////
+             console.log($tab_items.prevObject);
+             //JSON OBJECT
+             $PaperEditLinesObject = {paperedit_id: $PaperEditID, lines:[]};
+             
+            jQuery.each( $rows, function(index, value) { 
+                  if(value.cells[0]){
+                     $id = value.cells[0].id; 
+                  }else{
+                    $id="LastRow";
+                  }
+                    console.log('row: ' + index +" cells: " +$id +" n: "+$n);
+                     // $arrayOfLines = [  "line_id"+$id  , "position_"+index+"$ "]
+                     $LineObject = {line_id: " " , position_id: " " };
+                      $LineObject.line_id = $id;
+                       $LineObject.position_id = index;
+
+                     // $LineObject.position_id = index,
+                     $PaperEditLinesObject.lines[$n]= $LineObject,
+                    $n+=1; 
+                });
+            console.log($PaperEditLinesObject);
+             $table_to_update =  $PaperEditLinesObject, ////
+
+              //for eacj row firstChild.id = "line_id_61_position_4"
+               // var json_text = JSON.stringify(your_object, null, 2);
+               // console.log( String($table_to_update));
+               console.log("table_to_update: ");
+               console.log( $table_to_update);
+                $myTableObjectAsJsonString =   JSON.stringify( $table_to_update),  
+                 console.log("stringify: ");
+                console.log($myTableObjectAsJsonString);
+               ////////////////////////////////////////////
+               // window.open(url, '_blank');
+              //window.location.origin is equivalent of #{request.protocol}#{request.host} in rails
+              var currentUrl =  window.location.origin;
+              //creating JavaScript form to send to rails 
+               var fd = new FormData();
+               fd.append('somethins', $table_to_update);
+               //add things to the form
+               // fd.append('data',pp);
+               //need to find a way to append actual @paperEdit
+
+               console.log("object received back: ");
+               $.ajax({
+                  type: 'POST',
+                  // dataType: 'script',
+                  url: currentUrl +'/save_paper_edit/',
+                  // currentUrl +'/save_paper_edit/',
+                  // equivalent to localhost:3000/save_file in development mode.
+                         
+                    //data below works
+                    //PROBLEM : how to pass actual object to rails
+                    // POSSIBLE Solution, pass all objects in table, ie with serialize, and then update all of the LinePaperediting table in controller everytime. this would account for sortable within paper edit table, as well as for drag and drop.
+
+                      // data: $myTableObjectAsJsonString,
+                      data: $PaperEditLinesObject,
+                      //{ line_papereditings: {line_id:  2, paperediting_id: $PaperEditID,  position: 12 }},
+
+                      // data: { line_papereditings: {line_id:  2, paperediting_id: 11,  position: 12 }}, //I think this is only needed if you are passing a file?
+
+                     // data : $('connectedSortable').serialize(),
+                  // processData: false,
+                   // contentType: "text/plain",
+                   
+                    dataType: 'json'
+                }).done(function(data){
+
+                  // when funciton done, returns data, rendered back from the controller.
+                  console.log(data);
+                  // opens to the url received in response from the controller.
+                  // window.location = data;//might not need this
+                });
+                //end
+
+               ////////////////////////////////////////////
+            }
+          })
+          .disableSelection()
+      ;
+      
+      var $tab_items = $( ".tabs > li", $tabs ).droppable({
+
+        accept: ".connectedSortable tr",
+        hoverClass: "ui-state-hover",
+        over: function( event, ui ) {
+          var $item = $( this );
+          $item.find("a").tab("show");
+          
+        },
+        drop: function( event, ui ) {
+
+          return false;
+        }
+      });
+      
+  });
+
+  </script>
+
+
+<p id="notice"><%= notice %></p>
+
+
+
+    
+  <!-- tables  -->
+
+   <div class="container"> 
+      <!-- Button trigger modal -->
+
+  <!-- Button trigger modal -->
+
+    <h2>Paper Edit:<strong> <%= @paperedit.projectname %></strong> <small><%= link_to 'Edit', edit_paperedit_path(@paperedit) %> </small> </h2>
+
+
+<div class="row">
+    <br>
+      <%= link_to "CSV", paperedit_papercuts_path(format: "csv"), class: "btn btn-warning btn-xs" %>
+      <%= link_to "XML", paperedit_papercuts_path(format: "xml"), class: "btn btn-warning btn-xs" %>
+      <%= link_to "EDL", paperedit_papercuts_path(format: "edl"), class: "btn btn-warning btn-xs" %>
+    
+<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal">
+     View text Only
+    </button> </div>
+
+<hr>
+    <%= link_to 'Back', paperedits_path %>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Paper Edit: <strong><%= @paperedit.projectname %></strong>
+            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button></h4>
+          </div>
+          <div class="modal-body">
+                <p>  <strong></strong> Words,
+                <% c=[] %>
+      <%  @paperedit.lines.each do |l| %>
+    <% time_in = Timecode.parse_with_fractional_seconds("0"+l.tc_in, fps = 25) %>
+    <% time_out = Timecode.parse_with_fractional_seconds("0"+l.tc_out, fps = 25) %>
+    <% c << time_out - time_in  %>
+           <% end %>
+       <strong>  <%= c.sum %></strong> Video Duration </p></p>
+    <hr>
+
+     <p> <% @paperedit.lines.each do |l| %>
+            <strong><%= l.transcript.speakername %></strong>: "<%= l.text %>"</p>
+           <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!--   end of modal -->
+
+  <div class="row">
+
+  <!--     table test  -->
+
+  <div class="table table-responsive" > 
+      <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+          <div class="table-responsive col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <h2>Transcriptions</h2>
+           
+              <table class="table table-striped table-hover table-condensed table-responsive" id='table-draggable1'>  
+                  <tbody class="connectedSortable">  
+                      <tr>
+                      
+                        <th>L</th>
+                        <th>TC</th>
+                        <th>Speaker </th>
+                        <th>Transcribed Speech </th>
+                        </tr>
+                        <tr>
+                     
+                        <% Line.all.each do |line| %>
+                       
+                        <td id="<%=line.id %>"><%= link_to "#{line.n}", edit_transcript_line_path(line.transcript, line) %></td>
+                        <td ><%= line.tc_in  %> <br> <%= line.tc_out  %> </td>
+                        <td><%= line.transcript.speakername if line.transcript %> </td>
+                         <td><%= line.text %></td>
+                      </tr>  
+                    
+                      <% end %> 
+                  </tbody> 
+              </table>
+
+          </div>
+   </div> <!-- row -->
+     
+        
+              <h2>PaperEdit</h2>
+<div class="table-responsive col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="pane" id="tab2">              
+              <table class="table table-striped table-hover table-condensed table-responsive" id='table-draggable2'>  
+                  <tbody class="connectedSortable">  
+                     <tr>
+                       <th id="00">N</th>
+                       <th>L</th>
+                      <th>tc</th>
+                      <th>Speaker</th>
+                      <th>Text</th>
+                      <th></th>
+                      <th><%= link_to "Clear All", "#", class: "btn btn-danger btn-xs" %></th>
+                     
+
+
+                        <% @papercuts.order("position asc").each do |papercut| %>
+      <tr>
+        <td id="<%= papercut.line.id %>"><%= papercut.position %></td>
+        <td>
+          <% if !papercut.line.blank? %>
+          <%= papercut.line.n %>
+          
+          <% else %> 
+          NIL Line
+          <% end %> 
+        </td>
+        <td><%= papercut.line.tc_in %><br><%= papercut.line.tc_out %></td>
+        <td><%= papercut.line.transcript.speakername %></td>
+        <td><%= papercut.line.text %></td>
+        <td> <%= link_to 'Edit', edit_paperedit_papercut_path(papercut.paperedit, papercut), class: "btn btn-success btn-xs" %></td>
+    <td>
+    <%= link_to 'Remove', paperedit_papercut_path(papercut.paperedit, papercut),  class: "btn btn-danger btn-xs",
+                        method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+            <% end %>               
+                  </tbody> 
+              </table> 
+          </div>   <!-- col -->
+
+  <div> <!-- tabbale -->
+       </div> <!--    row -->
+        </div>
+  <!-- end table test -->
+
+
+     
+  </div><!-- div container -->
+   </div><!-- div container -->
+<br>
+<hr>
+
+
+

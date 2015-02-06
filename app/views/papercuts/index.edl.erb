@@ -1,0 +1,21 @@
+<%  n =0 %>
+<%= "TITLE: #{@paperedit.projectname.upcase}
+FCM: NON-DROP FRAME" %>
+
+<% rec_in = Timecode.parse("00:00:00:00",fps = 25) %>
+ <% @paperedit.lines.order("position asc").each do |l| %>
+ <% tc_meta = Timecode.parse(l.transcript.tc_meta, fps = 25) %>
+ <% time_in = Timecode.parse_with_fractional_seconds("0"+l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds("0"+l.tc_out, fps = 25) %>
+ <% rec_out =  time_out - time_in + rec_in%>
+<%  n += 1 %>
+<% reel = l.transcript.reel.gsub(/_/,"") %>
+<%= <<-PARAGRAPH
+00#{n}  #{reel[0..7]} AA/V  C        #{time_in + tc_meta} #{time_out + tc_meta} #{rec_in} #{rec_out}
+* FROM CLIP NAME:  #{l.transcript.filename.upcase}
+* COMMENT:#{" "}
+FINAL CUT PRO REEL: #{l.transcript.reel} REPLACED BY: #{reel[0..7]}
+  PARAGRAPH
+  %>
+  <% rec_in = rec_out%>
+<% end %>

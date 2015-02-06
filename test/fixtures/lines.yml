@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tc_in: MyString
+  tc_out: MyString
+  text: MyText
+  'n': 1
+  note: MyText
+  tag: MyString
+  transcript_id: 
+
+two:
+  tc_in: MyString
+  tc_out: MyString
+  text: MyText
+  'n': 1
+  note: MyText
+  tag: MyString
+  transcript_id: 

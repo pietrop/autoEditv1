@@ -1,0 +1,38 @@
+<h1>Listing lines</h1>
+
+<table>
+  <thead>
+    <tr>
+       <th>N</th>
+      <th>Tc in</th>
+      <th>Tc out</th>
+      <th>Text</th>
+     
+      <th>Note</th>
+      <th>Tag</th>
+      <th>Transcript</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lines.each do |line| %>
+      <tr>
+        <td><%= line.n %></td>
+        <td><%= line.tc_in %></td>
+        <td><%= line.tc_out %></td>
+        <td><%= line.text %></td>
+        <td><%= line.note %></td>
+        <td><%= line.tag %></td>
+        <td><%= line.transcript.name %></td>
+       
+        <td><%= link_to 'Edit', edit_transcript_line_path(@transcript,line) %></td>
+        <td><%= link_to 'Destroy', transcript_line_path(@transcript, line), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

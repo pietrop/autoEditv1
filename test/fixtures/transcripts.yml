@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  filename: MyString
+  speakername: MyString
+  date: MyString
+  youtubeurl: MyString
+  reel: MyString
+  tc_meta: MyString
+
+two:
+  filename: MyString
+  speakername: MyString
+  date: MyString
+  youtubeurl: MyString
+  reel: MyString
+  tc_meta: MyString

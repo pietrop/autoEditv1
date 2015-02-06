@@ -1,0 +1,2 @@
+module PapercutsHelper
+end

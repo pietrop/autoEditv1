@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transcript Name:</strong>
+  <%= @transcript.name %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @transcript.filename %>
+</p>
+
+<p>
+  <strong>Speakername:</strong>
+  <%= @transcript.speakername %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @transcript.date %>
+</p>
+
+<p>
+  <strong>Youtubeurl:</strong>
+  <%= @transcript.youtubeurl %>
+</p>
+
+<p>
+  <strong>Reel:</strong>
+  <%= @transcript.reel %>
+</p>
+
+<p>
+  <strong>Tc meta:</strong>
+  <%= @transcript.tc_meta %>
+</p>
+
+<%= link_to 'Edit', edit_transcript_path(@transcript) %> |
+<%= link_to 'Back', transcripts_path %>

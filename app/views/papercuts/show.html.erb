@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @papercut.position %>
+</p>
+
+<p>
+  <strong>Line:</strong>
+  <%= @papercut.line.n %>
+</p>
+
+<p>
+  <strong>Paperedit:</strong>
+  <%= @papercut.paperedit %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @papercut.comment %>
+</p>
+
+<%= link_to 'Edit', edit_papercut_path(@papercut) %> |
+<%= link_to 'Back', papercuts_path %>
+
+
+
+
+
+

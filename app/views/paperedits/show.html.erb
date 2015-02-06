@@ -1,0 +1,14 @@
+
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Projectname:</strong>
+  <%= @paperedit.projectname %> <small><%= link_to ' Edit', edit_paperedit_path(@paperedit) %> </small>
+</p>
+
+<%= link_to 'Back', paperedits_path %> |
+<%= link_to 'paperEdit', paperedit_papercuts_path(@paperedit) %> 
+
+
