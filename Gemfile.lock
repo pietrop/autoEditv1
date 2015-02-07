@@ -71,6 +71,7 @@ GEM
     minitest (5.5.1)
     multi_json (1.10.1)
     orm_adapter (0.5.0)
+    pg (0.18.1)
     popcornjs-rails (1.5.6)
     rack (1.5.2)
     rack-test (0.6.3)
@@ -142,6 +143,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
+  pg
   popcornjs-rails
   rails (= 4.1.8)
   sass-rails (~> 4.0.3)
