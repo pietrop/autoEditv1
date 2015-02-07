@@ -10,6 +10,7 @@ end
 # Use sqlite3 as the database for Active Record only in develooment
 group :development do
 	gem 'sqlite3'
+	  gem 'rails_12factor'
 end
 
 gem 'devise'
