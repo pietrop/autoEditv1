@@ -1,6 +1,6 @@
 class Transcript < ActiveRecord::Base
 	has_many :lines, dependent: :destroy
-
+  belongs_to :user
 
 
 

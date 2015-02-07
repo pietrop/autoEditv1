@@ -7,16 +7,24 @@
  <br>
     <br>
       <br>
-<center> <img src="./assets/red-button.png", class="img-responsive img-rounded" ></center>
+<center>
+ <img src="./assets/red-button.png", class="img-responsive img-rounded" ></center>
 
   <br>
     <br>
       <br>
-            <center>          <p><%= link_to 'Sign Up', 'hellowroeld' , class: "btn btn-primary btn-lg"  %></p>
+            <center>         
+
+ <% if user_signed_in? %>
+      <% else %>
+        <%= link_to "Sign up ", new_user_registration_path, :class => 'btn btn-primary btn-lg' %>
+      <% end %><br><br>
+
+
                       <p><%= link_to 'Beta', '#' , class: "btn btn-success disabled btn-xs"  %></p>
-            </center> 
+           
 
-
+ </center> 
 
 
 

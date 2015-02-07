@@ -1,11 +1,26 @@
 class PapercutsController < ApplicationController
   require 'csv'
   before_action :set_papercut, only: [:show, :edit, :update, :destroy]
+   before_action :authenticate_user!
   # attr_accessible :position #not sure if this is needed?
   # GET /papercuts
   # GET /papercuts.json
   def index
-    @paperedit = Paperedit.find(params[:paperedit_id])
+    @user = current_user
+
+    @transcripts = @user.transcripts
+
+    @allUserLines  =[]
+    @transcripts.each do |t|
+      t.lines.each do |l|
+       @allUserLines << l
+     end #end of loop
+   end#end of loop
+
+
+    
+
+    @paperedit =  @user.paperedits.find(params[:paperedit_id])
      @papercuts = @paperedit.papercuts
 
 

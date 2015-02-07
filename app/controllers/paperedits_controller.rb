@@ -1,16 +1,20 @@
 class PapereditsController < ApplicationController
   before_action :set_paperedit, only: [:show, :edit, :update, :destroy]
-
+ before_action :authenticate_user!
   # GET /paperedits
   # GET /paperedits.json
   def index
-    @paperedits = Paperedit.all
+    @user =current_user
+    @paperedits = @user.paperedits
   end
 
   # GET /paperedits/1
   # GET /paperedits/1.json
   def show
-     @paperedit = Paperedit.find(params[:id])
+     @user =current_user
+    @paperedit = @user.paperedits.find(params[:id])
+
+     # @paperedit = Paperedit.find(params[:id])
      if ! @paperedit.lines.blank?
        @lines = @paperedit.lines
        # @numberOfWords=  @paperedit.lines.find(:all).map(&:text).to_s.scan(/\w+/).size
@@ -19,7 +23,9 @@ class PapereditsController < ApplicationController
 
   # GET /paperedits/new
   def new
-    @paperedit = Paperedit.new
+      @user =current_user
+    @paperedit =   @user.paperedits.new
+   
   end
 
   # GET /paperedits/1/edit
@@ -29,7 +35,9 @@ class PapereditsController < ApplicationController
   # POST /paperedits
   # POST /paperedits.json
   def create
-    @paperedit = Paperedit.new(paperedit_params)
+     @user =current_user
+    @paperedit =    @user.paperedits.new(paperedit_params)
+    # @paperedit = Paperedit.new(paperedit_params)
 
     respond_to do |format|
       if @paperedit.save
@@ -45,6 +53,10 @@ class PapereditsController < ApplicationController
   # PATCH/PUT /paperedits/1
   # PATCH/PUT /paperedits/1.json
   def update
+    @user = current_user
+    @paperedit =  @user.paperedits.find( params[:id])
+
+
     respond_to do |format|
       if @paperedit.update(paperedit_params)
         format.html { redirect_to @paperedit, notice: 'Paperedit was successfully updated.' }

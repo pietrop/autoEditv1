@@ -12,8 +12,8 @@
     <% @paperedits.each do |paperedit| %>
       <tr>
         <td><%= paperedit.projectname %></td>
-        <td><%= link_to 'Show', paperedit_papercuts_path(paperedit),class: "btn btn-info btn-xs" %></td>
-        <td><%= link_to 'Edit', edit_paperedit_path(paperedit),class: "btn btn-success btn-xs" %></td>
+        <td><%= link_to 'Show', paperedit_papercuts_path(paperedit),class: "btn btn-link" %></td>
+        <td><%= link_to 'Edit', edit_paperedit_path(paperedit),class: "btn btn-link" %></td>
         <td><%= link_to 'Destroy', paperedit, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary btn-xs" %></td>
       </tr>
     <% end %>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Paperedit', new_paperedit_path,class: "btn btn-info btn-xs" %>
+<%= link_to 'New Paperedit', new_paperedit_path,class: "btn btn-link" %>

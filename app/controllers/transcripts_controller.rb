@@ -1,10 +1,12 @@
 class TranscriptsController < ApplicationController
   before_action :set_transcript, only: [:show, :edit, :update, :destroy]
-
+ before_action :authenticate_user!
+ 
   # GET /transcripts
   # GET /transcripts.json
   def index
-    @transcripts = Transcript.all
+    @user = current_user
+    @transcripts = @user.transcripts
   end
 
   # GET /transcripts/1
@@ -14,7 +16,8 @@ class TranscriptsController < ApplicationController
 
   # GET /transcripts/new
   def new
-    @transcript = Transcript.new(:date => Time.now, :youtubeurl => "http://youtu.be/")
+     @user = current_user
+    @transcript = @user.transcripts.new(:date => Time.now, :youtubeurl => "http://youtu.be/")
 
   end
 
@@ -25,7 +28,8 @@ class TranscriptsController < ApplicationController
   # POST /transcripts
   # POST /transcripts.json
   def create
-    @transcript = Transcript.create(transcript_params)
+    @user = current_user
+    @transcript =  @user.transcripts.create(transcript_params)
       @transcript.read_sbv_file(params[:sbv_file])
     redirect_to @transcript
 
@@ -43,6 +47,10 @@ class TranscriptsController < ApplicationController
   # PATCH/PUT /transcripts/1
   # PATCH/PUT /transcripts/1.json
   def update
+    # render plain: params[:id].inspect
+    @user = current_user
+    @transcript =  @user.transcripts.find( params[:id])
+
     respond_to do |format|
       if @transcript.update(transcript_params)
         format.html { redirect_to @transcript, notice: 'Transcript was successfully updated.' }
@@ -67,7 +75,9 @@ class TranscriptsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_transcript
-      @transcript = Transcript.find(params[:id])
+       @user = current_user
+    @transcript =  @user.transcripts.find(params[:id])
+      # @transcript = Transcript.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
