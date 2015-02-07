@@ -1,6 +1,8 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+# for heroku
+RAILS_ENV=production bundle exec rake assets:precompile
   # Code is not reloaded between requests.
   config.cache_classes = true
 
