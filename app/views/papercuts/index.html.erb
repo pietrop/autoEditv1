@@ -147,11 +147,11 @@
 
 <div class="row">
     <br>
-      <%= link_to "CSV", paperedit_papercuts_path(format: "csv"), class: "btn btn-warning btn-xs" %>
-      <%= link_to "XML", paperedit_papercuts_path(format: "xml"), class: "btn btn-warning btn-xs" %>
-      <%= link_to "EDL", paperedit_papercuts_path(format: "edl"), class: "btn btn-warning btn-xs" %>
+      <%= link_to "CSV", paperedit_papercuts_path(format: "csv"), class: "btn btn-danger btn-sm" %>
+      <%= link_to "XML", paperedit_papercuts_path(format: "xml"), class: "btn btn-danger btn-sm" %>
+      <%= link_to "EDL", paperedit_papercuts_path(format: "edl"), class: "btn btn-danger btn-sm" %>
     
-<button class="btn btn-warning btn-xs" data-toggle="modal" data-target="#myModal">
+<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
      View text Only
     </button> </div>
 
@@ -240,7 +240,7 @@
                       <th>Speaker</th>
                       <th>Text</th>
                       <th></th>
-                      <th><%= link_to "Clear All", "#", class: "btn btn-danger btn-xs" %></th>
+                      <th><%= link_to "Clear All", "#", class: "btn btn-primary btn-xs" %></th>
                      
 
 
@@ -260,7 +260,7 @@
         <td><%= papercut.line.text %></td>
         <td> <%= link_to 'Edit', edit_paperedit_papercut_path(papercut.paperedit, papercut), class: "btn btn-success btn-xs" %></td>
     <td>
-    <%= link_to 'Remove', paperedit_papercut_path(papercut.paperedit, papercut),  class: "btn btn-danger btn-xs",
+    <%= link_to 'Remove', paperedit_papercut_path(papercut.paperedit, papercut),  class: "btn btn-primary btn-xs",
                         method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
             <% end %>               
