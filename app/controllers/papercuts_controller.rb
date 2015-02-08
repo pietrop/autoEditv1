@@ -27,8 +27,8 @@ class PapercutsController < ApplicationController
 respond_to do |format|
     format.html
     format.csv { send_data @paperedit.lines.to_csv, filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.csv" }
-    format.xml {send_data @paperedit.lines.to_xml(skip_instruct: true, except: [ :id, :n, :created_at, :updated_at ]), filename: "Paperedit.xml" }
-    format.edl { response.headers['Content-Disposition'] = "attachment; filename=paperEdit.edl" }
+    format.xml {send_data @paperedit.lines.to_xml(skip_instruct: true, except: [ :id, :n, :created_at, :updated_at ]), filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.xml" }
+    format.edl { response.headers['Content-Disposition'] = "attachment; filename=paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.edl" }
     format.json { send_data @paperedit.lines.to_json, filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.json" }
     # format.json { render json: @paperediting.lines }
 end # end of looop

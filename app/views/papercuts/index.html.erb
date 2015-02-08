@@ -246,7 +246,7 @@ $(document).ready(function() {
    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 <div class="input-group"> <span class="input-group-addon">Search</span>
 
-    <input id="filter" type="text" class="form-control" placeholder="Type here...">
+    <input id="filter" type="text" class="form-control" placeholder="Type here to search the trasncripts...ie #aTag">
 </div>
 </div> <!-- col -->
 </div> <!-- row -->
@@ -285,7 +285,7 @@ $(document).ready(function() {
                      
                         <% @allUserLines.each do |line| %>
                        <td  id="<%=line.id %>"></td>
-                        <td id="<%=line.id %>"><%= link_to "#{line.n}", edit_transcript_line_path(line.transcript, line) %></td>
+                        <td id="<%=line.id %>"><%= "#{line.n}" %></td>
                         <td ><%= line.tc_in  %> <br> <%= line.tc_out  %> </td>
                         <td><%= line.transcript.speakername if line.transcript %> </td>
                         <td><%= best_in_place line, :text, as: :textarea %></td>
