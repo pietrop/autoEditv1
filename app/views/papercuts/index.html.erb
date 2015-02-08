@@ -155,6 +155,15 @@ $(document).ready(function () {
 </script>
 
 
+
+<!-- Best in place inline editing -->
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});
+</script>
+
 <p id="notice"><%= notice %></p>
 
   <!-- tables  -->
@@ -164,13 +173,34 @@ $(document).ready(function () {
 
   <!-- Button trigger modal -->
 <div class="row"> 
-<div class="col-xs-12 col-sm-12  col-md-12  col-lg-12 ">
-    <h2>Paper Edit:<strong> <%= @paperedit.projectname %></strong> <small><%= link_to 'Edit', edit_paperedit_path(@paperedit),class: "btn btn-link" %> </small> </h2>
+<div class="col-xs-12 col-sm-7  col-md-7  col-lg-7 ">
+    <h2>Paper Edit:<strong> <%= best_in_place @paperedit, :projectname %></strong> <small><%= link_to 'Edit', edit_paperedit_path(@paperedit),class: "btn btn-link" %> </small> </h2>
 
 
 </div> <!-- col -->
+<div class="col-xs-12 col-sm-5  col-md-5  col-lg-5 ">
+<!--  show tags in this transcript -->
 
- 
+
+<h3> Tags </h3>
+<%  @arrayOfTags = []    %>
+<% @allUserLines.each do |line|  %>
+<% if line.tag != nil then @arrayOfTags << line.tag end %>
+<%  end    %>
+<%  @hashOfTags = @arrayOfTags.sort { |w1, w2| w2.casecmp(w1) }.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 } %>
+
+
+
+<ul class="nav nav-pills">
+  <%   @hashOfTags.each do |tag, count| %>
+  <% if tag != ""  %>
+  <li class="active"><%= tag %> <span class="badge"><%= count %></span></li>
+  <% end %>
+  <% end %>
+</ul>
+
+
+ </div> <!-- col -->
 </div> <!-- row -->
  <br>
 
@@ -185,7 +215,7 @@ $(document).ready(function () {
             <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button></h4>
           </div>
           <div class="modal-body">
-                <p>  <strong></strong> Words,
+                <p>  <strong><%= @paperedit.lines.order("n asc").map(&:text).to_s.scan(/\w+/).size  %></strong> Words,
                 <% c=[] %>
       <%  @paperedit.lines.each do |l| %>
     <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
@@ -258,11 +288,11 @@ $(document).ready(function () {
                         <td id="<%=line.id %>"><%= link_to "#{line.n}", edit_transcript_line_path(line.transcript, line) %></td>
                         <td ><%= line.tc_in  %> <br> <%= line.tc_out  %> </td>
                         <td><%= line.transcript.speakername if line.transcript %> </td>
-                        <td><%= line.text %></td>
+                        <td><%= best_in_place line, :text, as: :textarea %></td>
                      
                          
 
-                         <td><%= line.tag %></td>
+                         <td><%= best_in_place line, :tag %></td>
 
                       </tr>  
                     

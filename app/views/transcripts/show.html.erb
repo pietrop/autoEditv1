@@ -33,20 +33,16 @@ $(document).ready(function() {
 
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 <p>
-  <strong>Transcript Name:</strong>
-   
-    <%= best_in_place @transcript, :name %>
-</p>
-
-<p>
-  <strong>Filename:</strong>
+  <strong>File name:</strong>
    <%= best_in_place @transcript, :filename %>
  
 </p>
 
 <p>
-  <strong>Speakername:</strong>
+  <strong>Speaker name:</strong>
      <%= best_in_place @transcript, :speakername %>
   
 </p>
@@ -58,7 +54,7 @@ $(document).ready(function() {
 </p>
 
 <p>
-  <strong>Youtubeurl:</strong>
+  <strong>Youtube url:</strong>
   
   <%= link_to "#{@transcript.youtubeurl }",  @transcript.youtubeurl, :target => "_blank" %>
 
@@ -78,9 +74,81 @@ $(document).ready(function() {
 
 <%= link_to 'Edit', edit_transcript_path(@transcript) %> |
 <%= link_to 'Back', transcripts_path %>
-<br>
+</div> <!-- col -->
 
-<h1>Transcript</h1>
+
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<!--  show tags in this transcript -->
+<h3> Tags </h3>
+<%  @arrayOfTags = []    %>
+<% @transcript.lines.order("n asc").each do |line|  %>
+<% if line.tag != nil then @arrayOfTags << line.tag end %>
+<%  end    %>
+
+
+<%  @hashOfTags = @arrayOfTags.sort { |w1, w2| w2.casecmp(w1) }.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 } %>
+
+
+
+<ul class="nav nav-pills">
+  <%   @hashOfTags.each do |tag, count| %>
+  <% if tag != ""  %>
+  <li class="active"><%= tag %> <span class="badge"><%= count %></span></li>
+  <% end %>
+  <% end %>
+</ul>
+
+<!-- end of show tags -->
+
+
+</div> <!-- col -->
+</div> <!-- row -->
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Transcript: <strong><%= @transcript.speakername %> | <%= @transcript.filename %></strong>
+        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button></h4>
+      </div>
+      <div class="modal-body">
+            <p><strong>  <%= @transcript.lines.order("n asc").map(&:text).to_s.scan(/\w+/).size  %> </strong>Words,
+              <% c=[] %>
+  <%  @transcript.lines.each do |l| %>
+<% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
+       <% end %>
+   <strong>  <%= c.sum %></strong> Duration </p></p>
+<hr>
+       <p> <% @transcript.lines.order("n asc").each do |l| %>
+        <%= l.text %></p>
+       <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end of Modal  -->
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+<h1>Transcript: <%= best_in_place @transcript, :name %></h1>
+</div> <!-- col -->
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+ <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"> View Text Only
+</button>
+</div> <!-- col -->
+</div> <!-- row -->
+<br>
 
 <!-- search header  -->
 <div class="input-group"> <span class="input-group-addon">Search</span>
