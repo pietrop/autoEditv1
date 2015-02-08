@@ -22,7 +22,7 @@ sbv_file.read.split("\n").each do |line|
     state = :text
   when :text
     if line.empty?
-      self.lines.create!(tc_in: tc_in, tc_out: tc_out, text: text_chunks.join(' '), n: n)
+      self.lines.create!(tc_in: "0"+tc_in, tc_out: "0"+tc_out, text: text_chunks.join(' '), n: n)
       text_chunks = []
       state = :timecodes
     else

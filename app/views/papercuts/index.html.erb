@@ -248,7 +248,7 @@
 
                         <% @papercuts.order("position asc").each do |papercut| %>
       <tr>
-        <td  id="<%= papercut.line.id %>"><%= papercut.position %></td>
+        <td  id="<%= if papercut.line then papercut.line.id  end %>"><%= papercut.position %></td>
         <td>
           <% if !papercut.line.blank? %>
           <%= papercut.line.n %>
@@ -257,9 +257,9 @@
           NIL Line
           <% end %> 
         </td>
-        <td><%= papercut.line.tc_in %><br><%= papercut.line.tc_out %></td>
-        <td><%= papercut.line.transcript.speakername %></td>
-        <td><%= papercut.line.text %></td>
+        <td><%= if papercut.line then papercut.line.tc_in end %><br><%= if papercut.line then papercut.line.tc_out end %></td>
+        <td><%= if papercut.line then papercut.line.transcript.speakername end %></td>
+        <td><%= if papercut.line then papercut.line.text end %></td>
         <td> <%= link_to 'Edit', edit_paperedit_papercut_path(papercut.paperedit, papercut), class: "btn btn-success btn-xs" %></td>
     <td>
     <%= link_to 'Remove', paperedit_papercut_path(papercut.paperedit, papercut),  class: "btn btn-primary btn-xs",
