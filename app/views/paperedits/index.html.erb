@@ -1,25 +1,60 @@
-<h1>Listing paperedits</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Projectname</th>
-      <th colspan="3"></th>
+
+<h1>paperedits  <%= link_to 'New Paper-Edit', new_paperedit_path, class: "btn btn-warning btn-xs"  %></h1>
+<p></p>
+
+
+
+<div class="row">
+<div class="col-6">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-responsive">
+  <tr>
+    <th>Project Name</th>
+     <th>word count</th>
+      <th>Lines</th>
+       <th>Speakers</th>
+       <th>Duration<br><small>hh:mm:ss:fps</small></th>
+       <th> Reading time</th>
+     <th></th>
+     <th></th>
+    <th></th>
     </tr>
-  </thead>
 
-  <tbody>
-    <% @paperedits.each do |paperedit| %>
-      <tr>
-        <td><%= paperedit.projectname %></td>
-        <td><%= link_to 'Show', paperedit_papercuts_path(paperedit),class: "btn btn-link" %></td>
-        <td><%= link_to 'Edit', edit_paperedit_path(paperedit),class: "btn btn-link" %></td>
-        <td><%= link_to 'Destroy', paperedit, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary btn-xs" %></td>
-      </tr>
-    <% end %>
-  </tbody>
+
+    <tr>
+
+    <% @paperedits.each do |p| %>
+      <% a =[]  %>
+      <% c=[] %>
+    <td><%= link_to "#{p.projectname}", paperedit_papercuts_path(p), class: "btn btn-link" %></td>
+       <td><%= p.lines.map(&:text).to_s.scan(/\w+/).size %></td>
+    <td><%= p.lines.count %></td>
+  <td> <% p.lines.each do |l| %>
+    <% b = l.transcript.speakername %>
+       <% a << b %>
+  <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
+       <% end %>
+<%= a.uniq.to_csv %>
+
+
+     </td>
+     <td><%= c.sum %></td>
+     <% word_count =  p.lines.map(&:text).to_s.scan(/\w+/).size %>
+<td> <%= (word_count / 100.0).ceil %> minutes</td>
+
+<td><%= link_to "show", paperedit_papercuts_path(p), class: "btn btn-info btn-xs" %></td>
+
+    <td><%= link_to "edit", edit_paperedit_path(p), class: "btn btn-success btn-xs"  %></td>
+    <td><%= link_to 'Delete', paperedit_path(p),  class: "btn btn-primary btn-xs",
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+</tr>
+<% end %>
 </table>
+</div>
+</div>
+</div>
 
-<br>
-
-<%= link_to 'New Paperedit', new_paperedit_path,class: "btn btn-link" %>

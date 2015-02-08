@@ -141,7 +141,7 @@ $(document).ready(function() {
 <!-- end of Modal  -->
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-<h1>Transcript: <%= best_in_place @transcript, :name %></h1>
+<h2><strong>Transcript: </strong><%= best_in_place @transcript, :name %></h2>
 </div> <!-- col -->
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
  <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"> View Text Only
@@ -167,6 +167,7 @@ $(document).ready(function() {
       <th>Note</th>
       <th>Tag</th>
       <th>Transcript</th>
+     
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -175,8 +176,8 @@ $(document).ready(function() {
     <% @transcript.lines.order("n asc").each do |line| %>
       <tr>
         <td><%= line.n %></td>
-        <td><%= line.tc_in %></td>
-        <td><%= line.tc_out %></td>
+        <td><%= best_in_place line, :tc_in %></td>
+        <td><%= best_in_place  line, :tc_out %></td>
        
         <td>   <%= best_in_place @transcript.lines.find(line.id), :text, as: :textarea %></td>
       
@@ -184,8 +185,8 @@ $(document).ready(function() {
         <td>   <%= best_in_place @transcript.lines.find(line.id), :tag %></td>
         <td><%= line.transcript.name %></td>
        
-        <td><%= link_to 'Edit', edit_transcript_line_path(@transcript,line) %></td>
-        <td><%= link_to 'Destroy', transcript_line_path(@transcript, line), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      
+        <td><%= link_to 'Destroy', transcript_line_path(@transcript, line),   class: "btn btn-primary btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -174,7 +174,7 @@ $(document).ready(function() {
   <!-- Button trigger modal -->
 <div class="row"> 
 <div class="col-xs-12 col-sm-7  col-md-7  col-lg-7 ">
-    <h2>Paper Edit:<strong> <%= best_in_place @paperedit, :projectname %></strong> <small><%= link_to 'Edit', edit_paperedit_path(@paperedit),class: "btn btn-link" %> </small> </h2>
+    <h2><strong>Paper Edit:</strong> <%= best_in_place @paperedit, :projectname %> <small><%= link_to 'Edit', edit_paperedit_path(@paperedit),class: "btn btn-link" %> </small> </h2>
 
 
 </div> <!-- col -->
@@ -309,19 +309,19 @@ $(document).ready(function() {
           <div class="pane" id="tab2">        
           <div class="table-responsive col-xs-12 col-sm-6 col-md-6 col-lg-6">  
  <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">  
+    
             <h3>
-            Paper Edit</h3> 
-    </div> <!-- col -->
+            Paper Edit    
+  
 
-     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">  
-      <%= link_to "CSV", paperedit_papercuts_path(format: "csv"), class: "btn btn-danger btn-sm" %>
-      <%= link_to "XML", paperedit_papercuts_path(format: "xml"), class: "btn btn-danger btn-sm" %>
-      <%= link_to "EDL", paperedit_papercuts_path(format: "edl"), class: "btn btn-danger btn-sm" %>
-      <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
+
+      <%= link_to "CSV", paperedit_papercuts_path(format: "csv"), class: "btn btn-danger btn-xs" %>
+      <%= link_to "XML", paperedit_papercuts_path(format: "xml"), class: "btn btn-danger btn-xs" %>
+      <%= link_to "EDL", paperedit_papercuts_path(format: "edl"), class: "btn btn-danger btn-xs" %>
+      <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">
      View text Only
     </button>   
-</div> <!-- col -->
+</h3> 
 </div> <!-- row -->
     
  
