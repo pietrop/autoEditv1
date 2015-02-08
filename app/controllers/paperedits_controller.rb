@@ -41,7 +41,7 @@ class PapereditsController < ApplicationController
 
     respond_to do |format|
       if @paperedit.save
-        format.html { redirect_to @paperedit, notice: 'Paperedit was successfully created.' }
+        format.html { redirect_to paperedit_papercuts_path(@paperedit), notice: 'Paperedit was successfully created.' }
         format.json { render :show, status: :created, location: @paperedit }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class PapereditsController < ApplicationController
 
     respond_to do |format|
       if @paperedit.update(paperedit_params)
-        format.html { redirect_to @paperedit, notice: 'Paperedit was successfully updated.' }
+        format.html { redirect_to paperedit_papercuts_path(@paperedit), notice: 'Paperedit was successfully updated.' }
         format.json { render :show, status: :ok, location: @paperedit }
       else
         format.html { render :edit }
