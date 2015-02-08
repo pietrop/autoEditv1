@@ -12,7 +12,7 @@ class PapercutsController < ApplicationController
 
     @allUserLines  =[]
     @transcripts.each do |t|
-      t.lines.each do |l|
+      t.lines.order("n asc").each do |l|
        @allUserLines << l
      end #end of loop
    end#end of loop
