@@ -28,20 +28,32 @@ class TranscriptsController < ApplicationController
   # POST /transcripts
   # POST /transcripts.json
   def create
+  # render plain: params[:sbv_file].original_filename.inspect
     @user = current_user
     @transcript =  @user.transcripts.create(transcript_params)
-      @transcript.read_sbv_file(params[:sbv_file])
-    redirect_to @transcript
 
-    # respond_to do |format|
-    #   if @transcript.save
-    #     format.html { redirect_to @transcript, notice: 'Transcript was successfully created.' }
-    #     format.json { render :show, status: :created, location: @transcript }
-    #   else
-    #     format.html { render :new }
-    #     format.json { render json: @transcript.errors, status: :unprocessable_entity }
-    #   end
-    # end
+    # if TRANSCRIPT IF SBV CALLL SBV METHOD
+    if params[:sbv_file].original_filename.split(".")[1]=="sbv"
+      @transcript.read_sbv_file(params[:sbv_file])
+    
+
+ # IF TRANSCRIPT IS SRT CALL SRT METHOD
+  elsif params[:sbv_file].original_filename.split(".")[1]=="srt"
+     @transcript.read_srt_file(params[:sbv_file])
+
+     # render plain: params[:sbv_file].original_filename.inspect
+
+  end#end if
+
+    respond_to do |format|
+      if @transcript.save
+        format.html { redirect_to @transcript, notice: 'Transcript was successfully created.' }
+        format.json { render :show, status: :created, location: @transcript }
+      else
+        format.html { render :new }
+        format.json { render json: @transcript.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /transcripts/1

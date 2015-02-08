@@ -5,8 +5,8 @@ FCM: NON-DROP FRAME" %>
 <% rec_in = Timecode.parse("00:00:00:00",fps = 25) %>
  <% @paperedit.lines.order("position asc").each do |l| %>
  <% tc_meta = Timecode.parse(l.transcript.tc_meta, fps = 25) %>
- <% time_in = Timecode.parse_with_fractional_seconds("0"+l.tc_in, fps = 25) %>
-<% time_out = Timecode.parse_with_fractional_seconds("0"+l.tc_out, fps = 25) %>
+ <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
  <% rec_out =  time_out - time_in + rec_in%>
 <%  n += 1 %>
 <% reel = l.transcript.reel.gsub(/_/,"") %>

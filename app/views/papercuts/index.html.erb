@@ -170,8 +170,8 @@
                 <p>  <strong></strong> Words,
                 <% c=[] %>
       <%  @paperedit.lines.each do |l| %>
-    <% time_in = Timecode.parse_with_fractional_seconds("0"+l.tc_in, fps = 25) %>
-    <% time_out = Timecode.parse_with_fractional_seconds("0"+l.tc_out, fps = 25) %>
+    <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+    <% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
     <% c << time_out - time_in  %>
            <% end %>
        <strong>  <%= c.sum %></strong> Video Duration </p></p>
@@ -248,7 +248,7 @@
 
                         <% @papercuts.order("position asc").each do |papercut| %>
       <tr>
-        <td id="<%= papercut.line.id %>"><%= papercut.position %></td>
+        <td  id="<%= papercut.line.id %>"><%= papercut.position %></td>
         <td>
           <% if !papercut.line.blank? %>
           <%= papercut.line.n %>
