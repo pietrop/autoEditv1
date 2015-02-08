@@ -59,7 +59,7 @@
   </thead>
 
   <tbody>
-    <% @transcript.lines.each do |line| %>
+    <% @transcript.lines.order("n asc").each do |line| %>
       <tr>
         <td><%= line.n %></td>
         <td><%= line.tc_in %></td>
