@@ -7,14 +7,15 @@
 <div class="table-responsive">
 <table class="table table-striped table-hover table-condensed table-responsive">
   <tr>
+    <th> Name  </th>
      <th> Speaker  </th>
-    <th> file  </th>
-    <th> date</th>
-    <th> youtube </th>
+    <th> File  </th>
+    <th> Fate</th>
+    <th> YouTube </th>
     <th> Text</th>
     <th> Lines </th>
     <th> Words</th>
-    <th> reading time</th>
+    <th> Reading time</th>
     <th> Transcribed speech duration</th>
     <th> File duration</th>
     <th> </th>
@@ -27,7 +28,7 @@
 
     <% @transcripts.each do |t| %>
   <% a =[]  %>
-
+<td><%= link_to "#{t.name}", transcript_path(t),  class: "btn btn-link" %></td>
     <td><%= link_to "#{t.speakername}", transcript_path(t),  class: "btn btn-link" %></td>
      <td><%= t.filename %></td>
     <td><%= t.date  %> </td>
