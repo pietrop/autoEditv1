@@ -17,6 +17,9 @@ end
   resources :lines
 end
 
+# trying for best in place, inline editing
+resources :lines
+
 # get '/features' => 'welcome#features'
 # get '/about' => 'welcome#about'
 

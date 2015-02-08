@@ -22,26 +22,40 @@ $(document).ready(function () {
 
 </script>
 
+
+
+<!-- Best in place inline editing -->
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+  /* Activating Best In Place */
+  jQuery(".best_in_place").best_in_place();
+});
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <p>
   <strong>Transcript Name:</strong>
-  <%= @transcript.name %>
+   
+    <%= best_in_place @transcript, :name %>
 </p>
 
 <p>
   <strong>Filename:</strong>
-  <%= @transcript.filename %>
+   <%= best_in_place @transcript, :filename %>
+ 
 </p>
 
 <p>
   <strong>Speakername:</strong>
-  <%= @transcript.speakername %>
+     <%= best_in_place @transcript, :speakername %>
+  
 </p>
 
 <p>
   <strong>Date:</strong>
-  <%= @transcript.date %>
+   <%= best_in_place @transcript, :date %>
+ 
 </p>
 
 <p>
@@ -53,12 +67,14 @@ $(document).ready(function () {
 
 <p>
   <strong>Reel:</strong>
-  <%= @transcript.reel %>
+   <%= best_in_place @transcript, :reel %>
+ 
 </p>
 
 <p>
   <strong>Tc meta:</strong>
-  <%= @transcript.tc_meta %>
+   <%= best_in_place @transcript, :tc_meta %>
+
 </p>
 
 <%= link_to 'Edit', edit_transcript_path(@transcript) %> |
@@ -94,9 +110,11 @@ $(document).ready(function () {
         <td><%= line.n %></td>
         <td><%= line.tc_in %></td>
         <td><%= line.tc_out %></td>
-        <td><%= line.text %></td>
-        <td><%= line.note %></td>
-        <td><%= line.tag %></td>
+       
+        <td>   <%= best_in_place @transcript.lines.find(line.id), :text, as: :textarea %></td>
+      
+     <td>   <%= best_in_place @transcript.lines.find(line.id), :note, as: :textarea  %></td>
+        <td>   <%= best_in_place @transcript.lines.find(line.id), :tag %></td>
         <td><%= line.transcript.name %></td>
        
         <td><%= link_to 'Edit', edit_transcript_line_path(@transcript,line) %></td>

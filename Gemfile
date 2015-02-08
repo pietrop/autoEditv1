@@ -13,7 +13,10 @@ group :development do
 	  gem 'rails_12factor'
 end
 
-
+# inline editing 
+# http://railscasts.com/episodes/302-in-place-editing?view=asciicast
+# https://github.com/bernat/best_in_place
+gem 'best_in_place'
 
 gem 'devise'
 

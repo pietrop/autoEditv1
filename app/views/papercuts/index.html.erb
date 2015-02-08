@@ -249,6 +249,7 @@ $(document).ready(function () {
                         <th>TC</th>
                         <th>Speaker </th>
                         <th>Transcribed Speech </th>
+                        <th>Tag</th>
                         </tr>
                         <tr>
                      
@@ -257,7 +258,11 @@ $(document).ready(function () {
                         <td id="<%=line.id %>"><%= link_to "#{line.n}", edit_transcript_line_path(line.transcript, line) %></td>
                         <td ><%= line.tc_in  %> <br> <%= line.tc_out  %> </td>
                         <td><%= line.transcript.speakername if line.transcript %> </td>
-                         <td><%= line.text %></td>
+                        <td><%= line.text %></td>
+                     
+                         
+
+                         <td><%= line.tag %></td>
 
                       </tr>  
                     
@@ -299,6 +304,7 @@ $(document).ready(function () {
                       <th>tc</th>
                       <th>Speaker</th>
                       <th>Text</th>
+                      <th>Tag</th>
                       <th></th>
                       <th><%= link_to "Clear All", "#", class: "btn btn-primary btn-xs" %></th>
                      
@@ -318,6 +324,7 @@ $(document).ready(function () {
         <td><%= if papercut.line then papercut.line.tc_in end %><br><%= if papercut.line then papercut.line.tc_out end %></td>
         <td><%= if papercut.line then papercut.line.transcript.speakername end %></td>
         <td><%= if papercut.line then papercut.line.text end %></td>
+          <td><%= if papercut.line then papercut.line.tag end %></td>
         <td> <%= link_to 'Edit', edit_paperedit_papercut_path(papercut.paperedit, papercut), class: "btn btn-success btn-xs" %></td>
     <td>
     <%= link_to 'Remove', paperedit_papercut_path(papercut.paperedit, papercut),  class: "btn btn-primary btn-xs",
