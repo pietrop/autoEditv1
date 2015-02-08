@@ -7,6 +7,8 @@ class TranscriptsController < ApplicationController
   def index
     @user = current_user
     @transcripts = @user.transcripts
+
+     # format.json { render json: @transcript.lines.to_json, status: :ok }
   end
 
   # GET /transcripts/1

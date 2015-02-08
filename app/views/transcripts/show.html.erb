@@ -1,3 +1,27 @@
+
+<!--  make table searchable -->
+<!-- from http://jsfiddle.net/giorgitbs/52aK9/1/ -->
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+
+    (function ($) {
+
+        $('#filter').keyup(function () {
+
+            var rex = new RegExp($(this).val(), 'i');
+            $('.searchable tr').hide();
+            $('.searchable tr').filter(function () {
+                return rex.test($(this).text());
+            }).show();
+
+        })
+
+    }(jQuery));
+
+});
+
+</script>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -43,6 +67,12 @@
 
 <h1>Transcript</h1>
 
+<!-- search header  -->
+<div class="input-group"> <span class="input-group-addon">Search</span>
+
+    <input id="filter" type="text" class="form-control" placeholder="Type here...">
+</div>
+<!-- end search header  -->
 <table class="table table-striped table-hover table-condensed table-responsive">
   <thead>
     <tr>
@@ -58,7 +88,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="searchable">
     <% @transcript.lines.order("n asc").each do |line| %>
       <tr>
         <td><%= line.n %></td>
@@ -77,3 +107,4 @@
 </table>
 
 <br>
+
