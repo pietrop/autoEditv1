@@ -17,7 +17,7 @@ class TranscriptsController < ApplicationController
   # GET /transcripts/new
   def new
      @user = current_user
-    @transcript = @user.transcripts.new(:date => Time.now, :youtubeurl => "http://youtu.be/")
+    @transcript = @user.transcripts.new(:date => Time.now.strftime("%d/%m/%Y"), :youtubeurl => "http://youtu.be/")
 
   end
 

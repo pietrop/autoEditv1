@@ -63,7 +63,7 @@ class LinesController < ApplicationController
   def destroy
     @line.destroy
     respond_to do |format|
-      format.html { redirect_to lines_url, notice: 'Line was successfully destroyed.' }
+      format.html { redirect_to transcript_path(@line.transcript), notice: 'Line was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

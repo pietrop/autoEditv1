@@ -13,40 +13,46 @@
 
  <div class="field">
     <%= f.label :transcript_name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
 
    <div class="form-group">
     <%= f.label :sbv_file %><br>
     <%= file_field_tag :sbv_file , class: 'form-control' %>
-    <span class="help-block">.sbv transcription file from youtube</span>
+    <span class="help-block">.sbv or .srt transcription file, ie from youtube captioning</span>
   </div>
 
   <div class="field">
     <%= f.label :filename %><br>
-    <%= f.text_field :filename %>
+    <%= f.text_field :filename , placeholder:"ie XF5001.mov", class: 'form-control' %>
+    <span class="help-block">File name of the transcribed video</span>
   </div>
   <div class="field">
     <%= f.label :speakername %><br>
-    <%= f.text_field :speakername %>
+    <%= f.text_field :speakername, placeholder:"What is the name of the person interviewed?", class: 'form-control'  %>
   </div>
   <div class="field">
     <%= f.label :date %><br>
-    <%= f.text_field :date %>
+    <%= f.text_field :date, class: 'form-control' %>
+    <span class="help-block">You can check in the metadata of the clip for this too. dd/mm/yyyy</span>
   </div>
   <div class="field">
     <%= f.label :youtubeurl %><br>
-    <%= f.text_field :youtubeurl %>
+    <%= f.text_field :youtubeurl, class: 'form-control' %>
+     <span class="help-block">The URL where you uploaded the video to get the youtube captions, needed to show you a preview of the paperedit</span>
   </div>
   <div class="field">
     <%= f.label :reel %><br>
-    <%= f.text_field :reel %>
+    <%= f.text_field :reel, class: 'form-control' %>
+       <span class="help-block">Metada of the Card name, you can use fcp or another editing software to find this out. You might have changed this name while backing up, transcoding, ie if using canon xf utility</span>
   </div>
   <div class="field">
-    <%= f.label :tc_meta %><br>
-    <%= f.text_field :tc_meta %>
+    <%= f.label :start_timecode_in_metadata_of_video_file %><br>
+    <%= f.text_field :tc_meta, class: 'form-control' %>
+    <span class="help-block">Start timecode in the metadata of the video file ie. the timecode of the video in the editing software might not start at 00:00:00:00 but for example at 00:49:04:20, depending on how the timecodes where recorded in the camera, ie rec run, free run etc..</span>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    
+    <%= f.button 'Save', class: 'btn btn-primary' %>
   </div>
 <% end %>
