@@ -3,7 +3,7 @@ Rails.application.configure do
 
 
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'autoedit.heroku.com' }#
+  config.action_mailer.default_url_options = { :host => 'beta.autoedit.com' }#
 
 ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
