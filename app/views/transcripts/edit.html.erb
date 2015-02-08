@@ -1,6 +1,9 @@
 <legend>Edit Transcript</legend>
 
 <%= render 'form' %>
+<br>
+<%= link_to 'Back', transcripts_path, class: 'btn btn-default btn' %>
+<%= link_to 'Show', @transcript, class: 'btn btn-info' %> 
 
-<%= link_to 'Show', @transcript %> |
-<%= link_to 'Back', transcripts_path %>
+
+

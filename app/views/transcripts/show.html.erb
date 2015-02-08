@@ -71,9 +71,6 @@ $(document).ready(function() {
    <%= best_in_place @transcript, :tc_meta %>
 
 </p>
-
-<%= link_to 'Edit', edit_transcript_path(@transcript) %> |
-<%= link_to 'Back', transcripts_path %>
 </div> <!-- col -->
 
 
@@ -186,7 +183,7 @@ $(document).ready(function() {
         <td><%= line.transcript.name %></td>
        
       
-        <td><%= link_to 'Destroy', transcript_line_path(@transcript, line),   class: "btn btn-primary btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', transcript_line_path(@transcript, line),   class: "btn btn-primary btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

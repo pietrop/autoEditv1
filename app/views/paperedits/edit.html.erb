@@ -1,6 +1,7 @@
-<h1>Editing paperedit</h1>
+<h1>Edit Paper Edit</h1>
 
 <%= render 'form' %>
+<br>
 
-<%= link_to 'Show', @paperedit %> |
-<%= link_to 'Back', paperedits_path %>
+<%= link_to 'Back', paperedits_path , class: 'btn btn-default btn'%>
+<%= link_to 'Show', paperedit_papercuts_path(@paperedit), class: 'btn btn-info' %> 
