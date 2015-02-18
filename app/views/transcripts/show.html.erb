@@ -77,13 +77,15 @@ $(document).ready(function() {
      <% word_count =  @transcript.lines.map(&:text).to_s.scan(/\w+/).size %>
 <p><strong>Reading Time: </strong><%= (word_count / 100.0).ceil %> minutes</p>
 
-
  <% c=[] %>
  <% @transcript.lines.each do |l| %>
- <%= l.tc_in.inspect %>
-  <%= l.tc_out.inspect %>
+  <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
        <% end %>
-
+<p><strong>Transcribed speech: </strong><%= c.sum %></p>
+      <% last_time_out = Timecode.parse_with_fractional_seconds(@transcript.lines.last.tc_out , fps = 25) if @transcript.lines.last %>
+<p><strong>File duration: </strong><%= last_time_out   %></p>
 
 
 
@@ -132,7 +134,17 @@ $(document).ready(function() {
       </div>
       <div class="modal-body">
             <p><strong>  <%= @transcript.lines.order("n asc").map(&:text).to_s.scan(/\w+/).size  %> </strong>Words,
-       
+              <% c=[] %>
+  <%  @transcript.lines.each do |l| %>
+<% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
+       <% end %>
+   <strong>  <%= c.sum %></strong> Duration </p></p>
+<hr>
+       <p> <% @transcript.lines.order("n asc").each do |l| %>
+        <%= l.text %></p>
+       <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
