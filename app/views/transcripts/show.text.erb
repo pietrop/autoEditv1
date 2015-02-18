@@ -9,6 +9,20 @@ Date: "<%= @transcript.date %>"
 File name: "<%= @transcript.filename %>"
 Reel: "<%= @transcript.reel %>"
 
+Lines: <%= @transcript.lines.count %>
+Words: <%= @transcript.lines.map(&:text).to_s.scan(/\w+/).size %>
+    	<% word_count =  @transcript.lines.map(&:text).to_s.scan(/\w+/).size %>
+Reading Time: <%= (word_count / 100.0).ceil %> minutes
+ <% c=[] %>
+ <% @transcript.lines.each do |l| %>
+  <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
+       <% end %>
+Transcribed speech: <%= c.sum %>
+      <% last_time_out = Timecode.parse_with_fractional_seconds(@transcript.lines.last.tc_out , fps = 25) if @transcript.lines.last %>
+File duration: <%= last_time_out   %>
+
 <% rec_in = Timecode.parse("00:00:00:00",fps = 25) %>
  <% @transcript.lines.order("n asc").each do |l| %>
  <% tc_meta = Timecode.parse(l.transcript.tc_meta, fps = 25) %>
@@ -18,11 +32,9 @@ Reel: "<%= @transcript.reel %>"
 <%  n += 1 %>
 <% reel = l.transcript.reel.gsub(/_/,"") %>
 <%= <<-PARAGRAPH
-#{l.n}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}
-Tags: #{l.tag}
+#{l.n}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}  #{if !l.tag.blank? then  l.tag else end }
 PARAGRAPH
-  %>
-<% end %>
+  %><% end %>
  <%= <<-PARAGRAPH
 *Timecode reference relative to transcription file
 beta.autoedit.io

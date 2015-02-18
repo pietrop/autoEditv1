@@ -71,6 +71,26 @@ $(document).ready(function() {
    <%= best_in_place @transcript, :tc_meta %>
 
 </p>
+<hr>
+ <p> <strong>Lines: </strong><%= @transcript.lines.count %></p>
+ <p> <strong>Words: </strong><%= @transcript.lines.map(&:text).to_s.scan(/\w+/).size %></p>
+     <% word_count =  @transcript.lines.map(&:text).to_s.scan(/\w+/).size %>
+<p><strong>Reading Time: </strong><%= (word_count / 100.0).ceil %> minutes</p>
+
+
+ <% c=[] %>
+ <% @transcript.lines.each do |l| %>
+  <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+<% c << time_out - time_in  %>
+       <% end %>
+<p><strong>Transcribed speech: </strong><%= c.sum %></p>
+      <% last_time_out = Timecode.parse_with_fractional_seconds(@transcript.lines.last.tc_out , fps = 25) if @transcript.lines.last %>
+<p><strong>File duration: </strong><%= last_time_out   %></p>
+
+
+
+<%= link_to "edit", edit_transcript_path(@transcript), class: "btn btn-success btn-xs"  %>
 </div> <!-- col -->
 
 

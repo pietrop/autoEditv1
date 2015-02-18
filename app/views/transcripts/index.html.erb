@@ -33,7 +33,10 @@
      <td><%= t.filename %></td>
     <td><%= t.date  %> </td>
 
-<td> <%= link_to "Youtube", "#{t.youtubeurl}", :target => "_blank",  class: "btn btn-info btn-xs"%></td>
+<td> 
+ <%= link_to "Youtube", "#{t.youtubeurl}", :target => "_blank",  class: "btn btn-info btn-xs"%>
+
+</td>
     <td><%= t.lines.first.text if t.lines.any? %> [...] </td>
     <td><%= t.lines.count %></td>
   <td><%= t.lines.map(&:text).to_s.scan(/\w+/).size %></td>
