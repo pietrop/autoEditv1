@@ -197,7 +197,12 @@ $(document).ready(function() {
 
   <tbody class="searchable">
     <% @transcript.lines.order("n asc").each do |line| %>
-      <tr>
+      <tr                       
+             <% if !line.tag.blank? %>
+                        <%=  raw("class='warning'").html_safe %>
+                       <% end %>
+
+      >
         <td><%= line.n %></td>
         <td><%= best_in_place line, :tc_in %></td>
         <td><%= best_in_place  line, :tc_out %></td>

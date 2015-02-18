@@ -28,6 +28,8 @@ resources :lines
   # changed to try something out
   post 'save_paper_edit/' => 'papercuts#save_paper_edit'
 
+  # clear all method to empty paper cuts in paper edit
+ get 'paperedits/:id/clear_all/' => 'papercuts#clear_all'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

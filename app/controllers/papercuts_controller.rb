@@ -116,35 +116,73 @@ end # end of looop
   end
 
   def save_paper_edit
+# THIS CODE NEEDS REFACTORING IN CONJUNCTION WITH JQUERY AJAX on INDEX.HTML.ERB
+# Params hash looks like this if line row beeing moved from transcript table
+# "{"1"=>{"line_id"=>"331Transcription", "position_id"=>"1"}, "2"=>{"line_id"=>"326Transcription", "position_id"=>"2"}}"
+# Params hash looks like this if line row beeing moved within paper edit table
+# "{"1"=>{"line_id"=>"326Position1", "position_id"=>"1"}, "2"=>{"line_id"=>"331Position1", "position_id"=>"2"}, "3"=>{"line_id"=>"331Position1", "position_id"=>"3"}, "4"=>{"line_id"=>"326Position1", "position_id"=>"4"}, "5"=>{"line_id"=>"326Position2", "position_id"=>"5"}, "6"=>{"line_id"=>"326Position2", "position_id"=>"6"}, "7"=>{"line_id"=>"331Position2", "position_id"=>"7"}}"
+
+#The idea is simple,  if it has 331Transcription in the line_id then comes from transcription table
+#  if it has 331Position1 in the line_id then it comes from the paper edit table, and the old position can be
+# taken from there to uniquely identify the paper cut, ie for this one 331Position1 old position would be 1 and line number 331.
 
 @paperedit = Paperedit.find(params[:paperedit_id])
-n= params[:lines].length # = numberOfelementsInTable 
 
-temp1 = "hello from controller"
 linesHash = params[:lines]
- linesHash.delete("0") #deletes this ie "0"=>{"line_id"=>"00", "position_id"=>"0"}
+ linesHash.delete("0") #deletes first useless element ie "0"=>{"line_id"=>"00", "position_id"=>"0"} , need to refactor in Jquery to avoid including it.
+# temp 1 is sends the line hash back to view to troubleshoot in browser console.
+temp1 = linesHash.inspect  #####
 
-temp2 =[]#for troubleshooting
+# iterates through all of the elements of the hash, 
+# where a key, value pair looks either lik this {"1"=>{"line_id"=>"326Position1", "position_id"=>"1"}
+#  or like this {"1"=>{"line_id"=>"331Transcription", "position_id"=>"1"}
+#  so to get position or line_id we call on value[:line_id] and value[:position]
 linesHash.each do |key, value|
-line = Line.find(value[:line_id])
+#returns true if Transcription is contained in value[:line_id]
+  if !value[:line_id].split(/Transcr/)[1].nil? 
+    # isolate line_id from transcription "tag"
+    lineID = value[:line_id].split(/Transcription/)[0]
+    # find line by ID
+    line = Line.find(lineID)
+    # adds line to paper edit, because it comes from transcription table
+    # and we want to allow to add same line from transcript more then once in the paper edit
+    @paperedit.lines << line
+    # finds the paper cut corresponding to the line added to the paper edit
+    # to uniquely identify we use the line_id,and we also know that a position as not been set by default so
+    # se uniquely idenfity it looking for line with that id and positon attribute null.
+    # because .where returs a collection array, we take first or last, to have a unique element.
+    papercut = Papercut.where(line_id: lineID, position: nil).last #for now only working with one instance of line per paper edit need to refactor this to support multiple lines.
+    # now that we have the papercut we can set it's position to the one passed into the params hash
+    # not sure if it needs .to_i, but updating position has been temperamental, so for now it works like this.
+    papercut.position = value[:position_id].to_i
+    # then we save paper cut to close this off.
+    papercut.save
+    # IF it's not from transcript table then  line is it's from paper edit table
+    # I initially had these two checks but decided to get rid of them to simply the code, as only two possibility are possible for now
+      # elsif value[:line_id].split(/Transcr/)[1].nil?
 
-# IF LINE IN PAPER EDIT THEN UPDATE POSITION
-if @paperedit.lines.include?(line)
-papercut = Papercut.where(line_id: line.id).first #for now only working with one instance of line per paper edit need to refactor this to support multiple lines.
-papercut.position = value[:position_id].to_i
-papercut.save
-# IF LINE NOT IN PAPER EDIT CREATE &&&&&& ADD POSITION
-else 
-  @paperedit.lines << line
-papercut = Papercut.where(line_id: line.id).first #for now only working with one instance of line per paper edit need to refactor this to support multiple lines.
-papercut.position = value[:position_id].to_i
-papercut.save
-end#end of if else statment
-# temp2<<value[:line_id]
-# temp2<<value[:position_id]
+      # elsif !value[:line_id].split(/Pos/)[1].nil?
+
+else
+  # to be able to update line's paper cuts, when changed in position within the paper edit
+  # we identify line_id and position, with method similar to one discussed above.
+    old_position = value[:line_id].split(/Position/)[1]
+    lineID = value[:line_id].split(/Position/)[0]
+    line = Line.find(lineID)
+    #we uniquely identify the line's paper cut, using the old position before it was moved.
+    # once again .where it returns a collection of one element , so we use .first to have a unique element. 
+    papercut = Papercut.where(line_id: line.id, position: old_position).first 
+    # we set the new upodate position to the one we passed
+    papercut.position = value[:position_id].to_i
+    # and save the paper cut
+    papercut.save
+end #of test if else stamtnt
 end#end of .each on hash
+
+# for troubleshooting
 temp={hello: "#{temp1}"}
 
+# format support.
 respond_to do |format|  
      # format.json { render json: {},send_data @paperediting.lines.to_json, filename: "paper-edit_#{ @paperediting.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.json", status: :ok }
     format.json { render json: temp, status: :ok} #   
@@ -157,6 +195,20 @@ respond_to do |format|
   end # end of respond to format
 end #end of save paperedit
 
+# Method to empty all lines in Paper edit at once.
+
+def clear_all
+  # render plain: params.inspect
+    @user = current_user
+
+    @paperedit =  @user.paperedits.find(params[:id])
+
+    @paperedit.papercuts.each do |pc|
+    pc.destroy 
+  end 
+  redirect_to paperedit_papercuts_path(@paperedit)
+
+end #end of clear_all
 ############################################################PRIVATE
   private
     # Use callbacks to share common setup or constraints between actions.

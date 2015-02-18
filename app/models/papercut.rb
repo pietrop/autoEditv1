@@ -7,6 +7,7 @@ class Papercut < ActiveRecord::Base
    belongs_to :transcript
   belongs_to :line
   accepts_nested_attributes_for :line#
+
 # default_scope order('created_at DESC')
   # default_scope order("created_at ASC")
   # belongs_to :lines

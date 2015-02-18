@@ -109,6 +109,8 @@ n = linesArray.length  #exclude first and last
       i+=1
 end 
 
+
+
 collectionOflinedAndpositionArray.each do |linePosition|
 
 line_id = linePosition[0]
@@ -154,6 +156,9 @@ respond_to do |format|
 
 
   end 
+
+
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.

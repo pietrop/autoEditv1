@@ -3,7 +3,8 @@ class Line < ActiveRecord::Base
   belongs_to :transcript
   has_many :papercuts
   has_many :paperedits, through: :papercuts
-  accepts_nested_attributes_for :papercuts
+  accepts_nested_attributes_for :papercuts, :paperedits
+
 
   def self.to_csv
   # raise "Kapow!!!"
