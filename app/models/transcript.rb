@@ -59,7 +59,7 @@ n=0
      n+=1
      text=" "
      tcs= l.split(/ --> /)
-    tc_in = tcs[0].sub(",",".").split("\n")[1]
+    tc_in = tcs[0].sub(",",".").split("\n")[0]
     tc_out = tcs[1].split(/\r\n/)[0].sub(",",".")
     elsif !l.empty?
       if !l.match(/^(\d)+$/)#it's not the line count,all digits
