@@ -7,7 +7,7 @@
 <% @paperedit.lines.each do |l| %>
 <% @transcriptArray << l.transcript %>
 <% end %>
-<% n=0%>
+<% @n=0%>
 Transcripts used in this Paper Edit:
 <% @transcriptArray.uniq.each do |t| %>
 Transcript <%= n+1%>: "<%= t.name %>", File name: "<%= t.filename %>", Speaker: "<%= t.speakername %>".
@@ -19,7 +19,7 @@ Transcript <%= n+1%>: "<%= t.name %>", File name: "<%= t.filename %>", Speaker: 
  <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
 <% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
  <% rec_out =  time_out - time_in + rec_in%>
-<%  n += 1 %>
+<%  @n += 1 %>
 <% reel = l.transcript.reel.gsub(/_/,"") %>
 <%= <<-PARAGRAPH
 #{n}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}
