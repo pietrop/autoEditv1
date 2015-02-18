@@ -23,7 +23,7 @@ Transcript <%= n+=1%>: "<%= t.name %>", File name: "<%= t.filename %>", Speaker:
 <%  m += 1 %>
 <% reel = l.transcript.reel.gsub(/_/,"") %>
 <%= <<-PARAGRAPH
-#{n}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}
+#{m}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}
 Tags: #{l.tag}
 From transcript: #{l.transcript.name}
 PARAGRAPH
