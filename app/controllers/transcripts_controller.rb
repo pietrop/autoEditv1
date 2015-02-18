@@ -14,6 +14,13 @@ class TranscriptsController < ApplicationController
   # GET /transcripts/1
   # GET /transcripts/1.json
   def show
+    respond_to do |format|
+      format.html   
+      format.text { response.headers['Content-Disposition'] = "attachment; filename=transcript_#{ @transcript.name}_#{Time.now.strftime("%Y-%m-%d_%R")}.txt" }
+      format.sbv { response.headers['Content-Disposition'] = "attachment; filename=transcript_#{ @transcript.name}_#{Time.now.strftime("%Y-%m-%d_%R")}.sbv" }
+      format.srt { response.headers['Content-Disposition'] = "attachment; filename=transcript_#{ @transcript.name}_#{Time.now.strftime("%Y-%m-%d_%R")}.srt" }
+  
+    end
   end
 
   # GET /transcripts/new

@@ -1,5 +1,6 @@
 class PapercutsController < ApplicationController
   require 'csv'
+
   before_action :set_papercut, only: [:show, :edit, :update, :destroy]
    before_action :authenticate_user!
   # attr_accessible :position #not sure if this is needed?
@@ -17,15 +18,13 @@ class PapercutsController < ApplicationController
      end #end of loop
    end#end of loop
 
-
-    
-
-    @paperedit =  @user.paperedits.find(params[:paperedit_id])
+     @paperedit =  @user.paperedits.find(params[:paperedit_id])
      @papercuts = @paperedit.papercuts
 
-
 respond_to do |format|
-    format.html
+    format.html   
+    # format.text{ send_data @paperedit.lines, filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.txt" }
+    format.text { response.headers['Content-Disposition'] = "attachment; filename=paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.txt" }
     format.csv { send_data @paperedit.lines.to_csv, filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.csv" }
     format.xml {send_data @paperedit.lines.to_xml(skip_instruct: true, except: [ :id, :n, :created_at, :updated_at ]), filename: "paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.xml" }
     format.edl { response.headers['Content-Disposition'] = "attachment; filename=paper-edit_#{ @paperedit.projectname}_#{Time.now.strftime("%Y-%m-%d_%R")}.edl" }

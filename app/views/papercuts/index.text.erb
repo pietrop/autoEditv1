@@ -1,0 +1,35 @@
+<%  n =0 %>
+<%= "Paper Edit: '#{@paperedit.projectname}' "%>
+<%= "by: #{@user.email} "%>
+<%= "Time: #{Time.now.strftime("%Y-%m-%d_%R")}"%>
+
+<% @transcriptArray =[] %>
+<% @paperedit.lines.each do |l| %>
+<% @transcriptArray << l.transcript %>
+<% end %>
+<% n=0%>
+Transcripts used in this Paper Edit:
+<% @transcriptArray.uniq.each do |t| %>
+Transcript <%= n+1%>: "<%= t.name %>", File name: "<%= t.filename %>", Speaker: "<%= t.speakername %>".
+<% end %>
+
+<% rec_in = Timecode.parse("00:00:00:00",fps = 25) %>
+ <% @paperedit.lines.order("position asc").each do |l| %>
+ <% tc_meta = Timecode.parse(l.transcript.tc_meta, fps = 25) %>
+ <% time_in = Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25) %>
+<% time_out = Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25) %>
+ <% rec_out =  time_out - time_in + rec_in%>
+<%  n += 1 %>
+<% reel = l.transcript.reel.gsub(/_/,"") %>
+<%= <<-PARAGRAPH
+#{n}  #{time_in } #{time_out } #{l.transcript.speakername}: #{l.text}
+Tags: #{l.tag}
+From transcript: #{l.transcript.name}
+PARAGRAPH
+  %>
+<% end %>
+ <%= <<-PARAGRAPH
+*Timecode reference relative to transcription file
+beta.autoedit.io
+  PARAGRAPH
+  %>

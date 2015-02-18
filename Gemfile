@@ -20,6 +20,8 @@ gem 'best_in_place'
 
 gem 'devise'
 
+gem 'rtf'
+
 # for heroku
 # gem 'heroku_secrets'
 

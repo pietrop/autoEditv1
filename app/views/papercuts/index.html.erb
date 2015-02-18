@@ -319,17 +319,12 @@ $(document).ready(function() {
   
 
 
-      <%= link_to raw("<span class='glyphicon glyphicon-list-alt' aria-hidden='true'> CSV</span>").html_safe, paperedit_papercuts_path(format: "csv"), class: "btn btn-danger btn-xs" %>
-      <%= link_to raw("<span class='glyphicon glyphicon-th-list' aria-hidden='true'> XML</span>").html_safe, paperedit_papercuts_path(format: "xml"), class: "btn btn-danger btn-xs" %>
-
-   
       <%= link_to raw("<span class='glyphicon glyphicon-film' aria-hidden='true'> EDL</span>").html_safe, paperedit_papercuts_path(format: "edl"), class: "btn btn-danger btn-xs" %>
-
-
-      
-
+      <%= link_to raw("<span class='glyphicon glyphicon-th-list' aria-hidden='true'> XML</span>").html_safe, paperedit_papercuts_path(format: "xml"), class: "btn btn-danger disabled btn-xs" %>
+      <%= link_to raw("<span class='glyphicon glyphicon-list-alt' aria-hidden='true'> CSV</span>").html_safe, paperedit_papercuts_path(format: "csv"), class: "btn btn-danger btn-xs" %>
+       <%= link_to raw("<span class='glyphicon glyphicon-file' aria-hidden='true'> Text</span>").html_safe, paperedit_papercuts_path(format: "text"), class: "btn btn-danger btn-xs" %>
       <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">
-        <span class="glyphicon glyphicon-file" aria-hidden="true">   Preview Text</span>
+        <span class="glyphicon glyphicon-file" aria-hidden="true"> Quick Text Preview</span>
   
     </button>   
 </h3> 

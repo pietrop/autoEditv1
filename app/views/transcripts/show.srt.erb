@@ -1,0 +1,9 @@
+<% n = 0%>
+<% @transcript.lines.order("n asc").each do |l| %>
+<%= <<-PARAGRAPH
+#{n+=1 }
+#{l.tc_in.sub(/\./,',')} --> #{l.tc_out.sub(/\./,',') }
+#{l.text}
+PARAGRAPH
+%>
+<% end %>

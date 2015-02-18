@@ -15,7 +15,7 @@
 
  <div class="field">
     <%= f.label :transcript_name %><br>
-    <%= f.text_field :name, class: 'form-control' %>
+    <%= f.text_field :name,  placeholder:"Interview with...",class: 'form-control' %>
   </div>
 
    <div class="form-group">
@@ -64,7 +64,7 @@
 <a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">  ?</a>
     <br>
     <%= f.text_field :tc_meta, class: 'form-control' %> 
-    <span class="help-block">Start timecode in the metadata of the video file ie. the timecode of the video in the editing software might not start at 00:00:00:00 but for example at 00:49:04:20, depending on how the timecodes where recorded in the camera, ie rec run, free run etc..</span>
+    <span class="help-block">Start timecode in the metadata of the video file ie. the timecode of the video in the editing software might not start at <code>00:00:00:00</code> but for example at <code>00:49:04:20</code>, depending on how the timecodes where recorded in the camera, ie rec run, free run etc..</span>
   </div>
   <div class="actions">
     
@@ -104,7 +104,7 @@
 <p>6. If the <code>Reel</code> name is blank, which could be for a number of reasons, such as working with footage from the Internet, or DSLRs, then in this field you can add a reel name, and it will prompt you to save it to disk, and write the metadata onto the actual file. </p><p>To use autoEdi, your video file needs to have a reel name, otherwise the exported EDL will not be have enough informations on it to be able to reconnect the sequence in the editing software of choie.</p> 
 <br>
 <p>For any questions: 
-<a href="mailto:info@autoedit.io?subject=autoEdit%20Private%20Beta%20Enquiry
+<a href="mailto:info@autoedit.io?subject=autoEdit%20Metadata%20Enquiry
 &body=Hello,%0D%0A I am trying to upload a transcript in autoEdit and I am having trouble with identifying the metadata..">info@autoedit.io</a></p>
 
       </div>

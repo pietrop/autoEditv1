@@ -141,8 +141,11 @@ $(document).ready(function() {
 <h2><strong>Transcript: </strong><%= best_in_place @transcript, :name %></h2>
 </div> <!-- col -->
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+   <%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> SBV</span>").html_safe, transcript_path(format: "sbv"), class: "btn btn-danger btn-xs " %>
+    <%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> SRT</span>").html_safe, transcript_path(format: "srt"), class: "btn btn-danger btn-xs disabled" %>
+  <%= link_to raw("<span class='glyphicon glyphicon-file' aria-hidden='true'> Text</span>").html_safe, transcript_path(format: "text"), class: "btn btn-danger btn-xs" %>
  <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"> 
-   <span class="glyphicon glyphicon-file" aria-hidden="true"> Preview Text</span>
+   <span class="glyphicon glyphicon-file" aria-hidden="true"> Quick Text Preview</span>
 </button>
 </div> <!-- col -->
 </div> <!-- row -->

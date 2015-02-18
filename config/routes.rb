@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # resources :paperedits
 
  root 'welcome#index'
-
+get '/faqs' => 'welcome#faqs'
   # resources :lines
 resources :paperedits do 
   resources :papercuts
