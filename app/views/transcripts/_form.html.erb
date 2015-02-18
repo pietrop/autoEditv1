@@ -23,12 +23,6 @@
     <%= file_field_tag :sbv_file , class: 'form-control' %>
     <span class="help-block">.sbv or .srt transcription file, ie from youtube captioning</span>
   </div>
-
-  <div class="field">
-    <%= f.label :filename %><br>
-    <%= f.text_field :filename , placeholder:"ie XF5001.mov", class: 'form-control' %>
-    <span class="help-block">File name of the transcribed video</span>
-  </div>
   <div class="field">
     <%= f.label :speakername %><br>
     <%= f.text_field :speakername, placeholder:"What is the name of the person interviewed?", class: 'form-control'  %>
@@ -43,14 +37,33 @@
     <%= f.text_field :youtubeurl, class: 'form-control' %>
      <span class="help-block">The URL where you uploaded the video to get the youtube captions, needed to show you a preview of the paperedit</span>
   </div>
+  
+  <br>
+  <hr>
+<h4>Camera Metadata<a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal"> ?</a></h4>
+
+    <div class="field">
+    <%= f.label :filename %>
+<!-- Button trigger modal -->
+<a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">  ?</a>
+    <br>
+    <%= f.text_field :filename , placeholder:"ie XF5001.mov", class: 'form-control' %>
+    <span class="help-block">File name of the transcribed video</span>
+  </div>
   <div class="field">
-    <%= f.label :reel %><br>
+    <%= f.label :reel %>
+<!-- Button trigger modal -->
+<a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">  ?</a>
+    <br>
     <%= f.text_field :reel, class: 'form-control' %>
        <span class="help-block">Metada of the Card name, you can use fcp or another editing software to find this out. You might have changed this name while backing up, transcoding, ie if using canon xf utility</span>
   </div>
   <div class="field">
-    <%= f.label :start_timecode_in_metadata_of_video_file %><br>
-    <%= f.text_field :tc_meta, class: 'form-control' %>
+    <%= f.label :Media_start %>
+<!-- Button trigger modal -->
+<a type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">  ?</a>
+    <br>
+    <%= f.text_field :tc_meta, class: 'form-control' %> 
     <span class="help-block">Start timecode in the metadata of the video file ie. the timecode of the video in the editing software might not start at 00:00:00:00 but for example at 00:49:04:20, depending on how the timecodes where recorded in the camera, ie rec run, free run etc..</span>
   </div>
   <div class="actions">
@@ -58,3 +71,47 @@
     <%= f.button 'Save', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+
+<!-- modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Where to find your file's <code>Camera Metadata</code></h4>
+      </div>
+      <div class="modal-body">
+        
+<p>We need the <code>filename</code>, <code>reel</code> and <code>Media Start</code> as it appears in the metadata of the video file.</p>
+
+<p>For instance In Final Cut Pro 7</p>
+<p>1. Find the clip in the inspector view, top left panel</p>
+<p>2. Rigth click the clip in the inspector view, top left panel</p>
+<p>3. Choose <code> item proprieties</code> -> <code>logging info</code></p>
+
+<%= image_tag "loggingInfo.png", class: "img-responsive" %>
+<p>4. in the <code>logging</code> tab, you'll find the first 3 fields are <code>Name</code>(filename), <code>Reel</code> and <code>Media Start</code></p>
+<%= image_tag "fileNameReelNameMediaStart.png", class: "img-responsive" %>
+
+<p>5. The only adjustment to make is that for the filename <code>Name</code> we need it with the <code>.mov</code> extension.</p> 
+
+<p>For instance if I were to take the file <code>Name</code> from the example it would be <code>CC027_01.mov</code> </p>
+
+<p>6. If the <code>Reel</code> name is blank, which could be for a number of reasons, such as working with footage from the Internet, or DSLRs, then in this field you can add a reel name, and it will prompt you to save it to disk, and write the metadata onto the actual file. </p><p>To use autoEdi, your video file needs to have a reel name, otherwise the exported EDL will not be have enough informations on it to be able to reconnect the sequence in the editing software of choie.</p> 
+<br>
+<p>For any questions: 
+<a href="mailto:info@autoedit.io?subject=autoEdit%20Private%20Beta%20Enquiry
+&body=Hello,%0D%0A I am trying to upload a transcript in autoEdit and I am having trouble with identifying the metadata..">info@autoedit.io</a></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>

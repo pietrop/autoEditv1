@@ -27,10 +27,15 @@
                   </div>
                   <div class="navbar-collapse collapse navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
-                      <li><%= link_to ' Transcripts', transcripts_path %></li>
-                      <li><%= link_to 'Paperedits', paperedits_path %></li>
-                      <li> <%= link_to 'New Transcript', new_transcript_path %></li>
-                      <li> <%= link_to 'New Paperedit', new_paperedit_path %></li>
+
+                    
+                      <li><%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> Transcripts</span>").html_safe, transcripts_path %></li>
+                      <li><%= link_to raw("<span class='glyphicon glyphicon-film' aria-hidden='true'> Paper Edits</span>").html_safe, paperedits_path %></li>
+
+                      
+                      <li><%= link_to raw("<span class='glyphicon glyphicon-circle-arrow-up' aria-hidden='true'> New Transcript</span>").html_safe, new_transcript_path %></li>
+                     
+                      <li><%= link_to raw("<span class='glyphicon glyphicon-plus' aria-hidden='true'> New Paper Edit</span>").html_safe, new_paperedit_path %></li>
                     </ul>
                        <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -73,6 +78,20 @@
 		<%= yield %>
 
 	</div>
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var $_Tawk_API={},$_Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/54e3d2103fc587e101fea9a4/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 
 </body>
 </html>

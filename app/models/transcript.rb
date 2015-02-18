@@ -3,7 +3,9 @@ class Transcript < ActiveRecord::Base
   belongs_to :user
 
 
+validates :filename, :speakername, :date, :youtubeurl, :reel, :tc_meta, :name, :presence => true
 
+# validates_attachment :sbv_file, :presence => true
 
 def read_sbv_file(sbv_file)
 
