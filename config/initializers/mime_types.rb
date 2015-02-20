@@ -6,4 +6,4 @@
 Mime::Type.register "application/edl", :edl
 Mime::Type.register "text/plain", :text
 Mime::Type.register "application/sbv", :sbv
-Mime::Type.register "application/sbv", :srt
+Mime::Type.register "application/srt", :srt
