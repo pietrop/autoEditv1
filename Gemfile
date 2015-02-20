@@ -16,7 +16,7 @@ end
 # for google analytics js to work, from http://railsapps.github.io/rails-google-analytics.html
 gem 'rails_12factor', group: :production
 # https://github.com/kangguru/rack-google-analytics
-gem 'rack-google-analytics'
+# gem 'rack-google-analytics'
 
 # inline editing 
 # http://railscasts.com/episodes/302-in-place-editing?view=asciicast
