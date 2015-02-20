@@ -14,7 +14,7 @@ class @GoogleAnalytics
     firstScript.parentNode.insertBefore ga, firstScript
 
     # If Turbolinks is supported, set up a callback to track pageviews on page:change.
-    # If it isn't supported, just track the pageview now.
+    # If it isn t supported, just track the pageview now.
     if typeof Turbolinks isnt 'undefined' and Turbolinks.supported
       document.addEventListener "page:change", (->
         GoogleAnalytics.trackPageview()
