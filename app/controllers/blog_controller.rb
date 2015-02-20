@@ -1,5 +1,5 @@
 require 'rss'
-class BlogsController < ApplicationController
+class BlogController < ApplicationController
 	def index
      begin
        @latest_blog_posts = RSS::Parser.parse(open('http://blog.autoedit.io/feeds/posts/default?alt=rss').read,false).items

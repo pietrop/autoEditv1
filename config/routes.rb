@@ -21,7 +21,7 @@ end
 resources :lines
 
 
-resources :blogs
+resources :blog
 
 # get '/features' => 'welcome#features'
 # get '/about' => 'welcome#about'
