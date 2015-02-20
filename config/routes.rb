@@ -20,6 +20,9 @@ end
 # trying for best in place, inline editing
 resources :lines
 
+
+resources :blogs
+
 # get '/features' => 'welcome#features'
 # get '/about' => 'welcome#about'
 

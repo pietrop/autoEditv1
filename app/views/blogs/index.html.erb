@@ -1,0 +1,44 @@
+<div class="row">
+<div class="col-xs-12 col-sm-8 col-md-offset-1 col-md-8 col-lg-8">
+<h1><strong>autoEdit's Blog</strong></h1>
+
+</div> <!-- col -->
+
+	
+<% unless @latest_blog_posts.nil? %>
+ 
+  <% @latest_blog_posts.each do |post| %>
+   <% if nil != post && post.respond_to?(:pubDate) %>
+<div class="col-xs-12 col-sm-8 col-md-offset-1 col-md-8 col-lg-8">
+<hr>
+<br>
+     <h1><%= post.title %><%= link_to "Read", blog_path(post.guid.content.split('tag:blogger.com,1999:blog-7149222418289544135.post-')[1]), class: "btn btn-link" %>
+      
+      </h1>
+   
+<small><%= post.pubDate %></small>
+
+<br>	
+	<% if  post.description[0..300].size >= post.description.size %>
+
+	<%=	post.description.html_safe %>
+	<% else %>
+		
+     <%= post.description[0..300].html_safe + "..." %>
+
+    
+
+     <% end %>
+     
+
+</div> <!-- col -->
+   <% end %>
+  <% end %>
+
+<% else %>
+ 	<p>
+  <em>No blog posts to show.</em>
+ </p>
+<% end %>
+
+</div> <!-- row -->
