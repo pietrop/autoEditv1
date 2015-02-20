@@ -15,8 +15,6 @@ class BlogController < ApplicationController
   	begin
        @latest_blog_posts = RSS::Parser.parse(open('http://blog.autoedit.io/feeds/posts/default?alt=rss').read,false).items
 
-
-
      rescue
        # Do nothing, just continue.  The view will skip the blog section if the feed is nil.
        @latest_blog_posts = nil
