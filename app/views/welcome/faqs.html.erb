@@ -90,4 +90,30 @@ $(function () {
 <p>There are ways in which autoEdit could support this, so if this is a feature you would be interested in please do get in touch.</p>
 
 
+<h2 id="metadata">I am uploading a transcript, how do I get the <code>filename</code>, <code>reel</code> and <code>media start</code> for the camera metadata section? </h2>
+
+
+<p>We need the <code>filename</code>, <code>reel</code> and <code>Media Start</code> as it appears in the metadata of the video file.</p>
+
+<p>For instance In Final Cut Pro 7</p>
+<p>1. Find the clip in the inspector view, top left panel</p>
+<p>2. Rigth click the clip in the inspector view, top left panel</p>
+<p>3. Choose <code> item proprieties</code> -> <code>logging info</code></p>
+
+<%= image_tag "loggingInfo.png", class: "img-responsive" %>
+<p>4. in the <code>logging</code> tab, you'll find the first 3 fields are <code>Name</code>(filename), <code>Reel</code> and <code>Media Start</code></p>
+<%= image_tag "fileNameReelNameMediaStart.png", class: "img-responsive" %>
+
+<p>5. The only adjustment to make is that for the filename <code>Name</code> we need it with the <code>.mov</code> extension.</p> 
+
+<p>For instance if I were to take the file <code>Name</code> from the example it would be <code>CC027_01.mov</code> </p>
+
+<p>6. If the <code>Reel</code> name is blank, which could be for a number of reasons, such as working with footage from the Internet, or DSLRs, then in this field you can add a reel name, and it will prompt you to save it to disk, and write the metadata onto the actual file. </p><p>To use autoEdi, your video file needs to have a reel name, otherwise the exported EDL will not be have enough informations on it to be able to reconnect the sequence in the editing software of choie.</p> 
+<br>
+<p>For any questions: 
+<a href="mailto:info@autoedit.io?subject=autoEdit%20Metadata%20Enquiry
+&body=Hello,%0D%0A I am trying to upload a transcript in autoEdit and I am having trouble with identifying the metadata..">info@autoedit.io</a></p>
+
+
+
 <br><br><br><br><br><br>

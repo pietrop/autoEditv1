@@ -23,6 +23,8 @@ resources :lines
 
 resources :blog
 
+
+
 # get '/features' => 'welcome#features'
 # get '/about' => 'welcome#about'
 
