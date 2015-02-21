@@ -1,5 +1,5 @@
 class Transcript < ActiveRecord::Base
-	has_many :lines, dependent: :destroy
+  has_many :lines, dependent: :destroy
   belongs_to :user
 
 
@@ -24,7 +24,7 @@ sbv_file.read.split("\n").each do |line|
     state = :text
   when :text
     if line.empty?
-      self.lines.create!(tc_in: "0"+tc_in, tc_out: "0"+tc_out, text: text_chunks.join(' '), n: n)
+      self.lines.create!(tc_in: "0"+tc_in.gsub(/\s+/, ""), tc_out: "0"+tc_out.gsub(/\s+/, ""), text: text_chunks.join(' ').force_encoding('UTF-8'), n: n)
       text_chunks = []
       state = :timecodes
     else
@@ -38,41 +38,20 @@ end#end of method
 
 
 def read_srt_file(srt_file)
-text=" "
-tc_in= " "
-tc_out = " "
+
 n=0
-# puts srt_file.class.inspect
- srt_file.read.split("\r\n").each do |l|
-  
-  # if line is number  ie 1
-  if l.match(/^[\d]*\r\n/)
-    # save number
-    # n = l.scan(/\d*/)[0]
-    
-  # elsif line is timecode ie "00:00:00,065 --> 00:00:03,162"
-  elsif  l.match(/\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}/)
+#uisng this gem srt https://github.com/cpetersen/srt
+file = SRT::File.parse(srt_file.read)
+  file.lines.each do |line|
+   n= line.sequence
+   tc_in= line.time_str.split(/ --> /)[0].sub(",",".").match(/\d{2}:\d{2}:\d{2}\.\d{3}/).to_s.gsub(/\s+/, "")
+   tc_out= line.time_str.split(/ --> /)[1 ].sub(",",".").match(/\d{2}:\d{2}:\d{2}\.\d{3}/).to_s.gsub(/\s+/, "")
+   # enforcing Encoding to UTF-8 coz otherwise when copy and pasting from word to make the srt, risk of ASCII compatibility issues.
+   text= line.text.join(' ').force_encoding('UTF-8') #.text is an srt method and it returns an array
+    self.lines.create!(tc_in: tc_in, tc_out: tc_out, text: text, n: n)
+  end
 
-    #this is to avoid aving a first line empty first time a round the loop
-     
-     self.lines.create!(tc_in: tc_in, tc_out: tc_out, text: text, n: n)
-     n+=1
-     text=" "
-     tcs= l.split(/ --> /)
-    tc_in = tcs[0].sub(",",".").split("\n")[0]
-    tc_out = tcs[1].split(/\r\n/)[0].sub(",",".")
-    elsif !l.empty?
-      if !l.match(/^(\d)+$/)#it's not the line count,all digits
-    speech = l.sub("\n"," ")
-    text += speech
-    end
 
-else
-
-end #else if
-
-end#do loop
-Transcript.last.lines.first.destroy
 end#end of method srt
 
 

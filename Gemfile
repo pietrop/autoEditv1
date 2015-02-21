@@ -27,6 +27,8 @@ gem 'devise'
 
 gem 'rtf'
 
+gem 'srt'
+
 # for heroku
 # gem 'heroku_secrets'
 

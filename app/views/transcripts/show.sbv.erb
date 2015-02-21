@@ -1,6 +1,6 @@
 <% @transcript.lines.order("n asc").each do |l| %>
 <%= <<-PARAGRAPH
-#{l.tc_in[1..12] }, #{l.tc_out[1..12] }
+#{Timecode.parse_with_fractional_seconds(l.tc_in, fps = 25).with_fractional_seconds()+"0"}, #{Timecode.parse_with_fractional_seconds(l.tc_out, fps = 25).with_fractional_seconds()+"0"}
 #{l.text}
 
 PARAGRAPH

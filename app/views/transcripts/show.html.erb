@@ -71,9 +71,10 @@ $(document).ready(function() {
    <%= best_in_place @transcript, :tc_meta %>
 
 </p>
+<%= link_to "edit", edit_transcript_path(@transcript), class: "btn btn-success btn-xs"  %>
 <hr>
- <p> <strong>Lines: </strong><%= @transcript.lines.count %></p>
- <p> <strong>Words: </strong><%= @transcript.lines.map(&:text).to_s.scan(/\w+/).size %></p>
+ <p> <strong>Lines: </strong><%= @transcript.lines.count %> 
+  <strong> Words: </strong><%= @transcript.lines.map(&:text).to_s.scan(/\w+/).size %></p>
      <% word_count =  @transcript.lines.map(&:text).to_s.scan(/\w+/).size %>
 <p><strong>Reading Time: </strong><%= (word_count / 100.0).ceil %> minutes</p>
 
@@ -89,7 +90,7 @@ $(document).ready(function() {
 
 
 
-<%= link_to "edit", edit_transcript_path(@transcript), class: "btn btn-success btn-xs"  %>
+
 </div> <!-- col -->
 
 
@@ -160,7 +161,7 @@ $(document).ready(function() {
 <h2><strong>Transcript: </strong><%= best_in_place @transcript, :name %></h2>
 </div> <!-- col -->
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-   <%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> SBV</span>").html_safe, transcript_path(format: "sbv"), class: "btn btn-danger btn-xs " %>
+   <%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> SBV</span>").html_safe, transcript_path(format: "sbv"), class: "btn btn-danger btn-xs disabled" %>
     <%= link_to raw("<span class='glyphicon glyphicon-align-justify' aria-hidden='true'> SRT</span>").html_safe, transcript_path(format: "srt"), class: "btn btn-danger btn-xs disabled" %>
   <%= link_to raw("<span class='glyphicon glyphicon-file' aria-hidden='true'> Text</span>").html_safe, transcript_path(format: "text"), class: "btn btn-danger btn-xs" %>
  <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal"> 
