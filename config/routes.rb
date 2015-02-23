@@ -31,7 +31,8 @@ resources :blog
  # gets post request form ajax in show.html.erb, once line as been dropped(in drag and drop).
   # post 'save_paper_edit/' => 'paperedits#save_paper_edit'
   # changed to try something out
-  post 'save_paper_edit/' => 'papercuts#save_paper_edit'
+
+post 'save_paper_edit/' => 'papercuts#save_paper_edit'
 
   # clear all method to empty paper cuts in paper edit
  get 'paperedits/:id/clear_all/' => 'papercuts#clear_all'
