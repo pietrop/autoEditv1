@@ -1,19 +1,30 @@
 
-        <div class="row">
-          
- <center> <h1>autoEdit</h1></center>
-  <p><center>"Edit the text to edit the video"<center>
-</div>
- <br>
-    <br>
-      <br>
-<center>
- <img src="./assets/red-button.png", class="img-responsive img-rounded" ></center>
+<div class="row">
+  <div class="col-sm-10  col-md-10 col-lg-10 col-md-offset-1 col-sm-offset-1 col-lg-offset-1">
+<!-- jumbo -->
+<br><br>
+<div class="jumbotron">
+  <div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+ <h1 class="cover-heading">autoEdit<img src="./assets/red-button-small.png" alt="red button logo" data-toggle="modal" data-target="#myModal"></h1>
+ <h2>"Editing the text edits the video"</h2>
+<p >Simple and fast text based audio and video interviews editing for media professionals. </p>
+<small> <a data-toggle="modal" data-target="#myModal">Find out more</a></small></p>
+</div> <!-- col -->
+<div class="col-sm-4 ">
 
-  <br>
-    <br>
-      <br>
-            <center>         
+
+           <br><br>
+          </div>
+          <div class="col-sm-4  col-md-4 col-lg-4 ">
+<!-- Wistia video -->
+     <iframe src="//fast.wistia.net/embed/iframe/oq5hweguz3" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="400" height="225"></iframe><script src="//fast.wistia.net/assets/external/E-v1.js" async></script>
+<!-- end of wistia video -->
+         
+  </div> <!-- col -->
+</div> <!-- row -->
+<br><br><br>
+    <center>         
 
  <% if user_signed_in? %>
       <% else %>
@@ -25,6 +36,37 @@
            
 
  </center> 
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">autoEdit's beta <img src="./assets/red-button-small.png" alt="red button logo"></h2>
+         <h4>"Editing the text edits the video"</h4>
+         <hr>
+          <h4 class="text-left">We have all been there, you got some great interviews and you are finally starting post-production. But no time to paper edit, let alone to work with transcriptions, and crafting the story out of the footage becomes a struggle, like wrestling with a bear.</p>
+
+  <h4>This is where autoEdit comes in, to simplify and speed-up video editing interviews. </p>
+
+  <h4>It’s a digital paper editing software. For those less familiar with it, a paper edit is a script made from a selection of lines from the transcriptions of interviews.</p>
+
+  <h4>With autoEdit, you can analyse your transcripts and mark them with tags and create a paper edit,  that you can then export as an EDL. You can then open in the editing software of your choice to reconnect the corresponding video into a sequence, and finish working on your rough-cut assembly.</p>
+
+  <h4>For the transcriptions, autoEdit, takes .sbv and .srt subtitles files, and the suggested workflow is to use youtube semi-automated captioning, to get a first draft of the timecoded transcriptions, that you can then proofread. Google/Youtube is very accurate at putting timecodes at the end of sentences, which is one less thing to do.
+</p>
+
+ <% if user_signed_in? %>
+      <% else %>
+      <h4><%= link_to "Sign up ", new_user_registration_path, :class => 'btn btn-link btn-lg' %> to find out more and start using autoEdit.</p>
+      <% end %>
+
+      For more info see the<%= link_to "FAQs ", faqs_path, :class => 'btn btn-lg btn-link' %> section and/or drop us an e-mail at<a href="mailto:info@autoedit.io?subject=autoEdit%20Private%20Beta%20Enquiry
+&body=Hello,%0D%0A I am interested in autoEdit because I think I could use it for..."> info@autoedit.io </a>.</small>
+      </div>
+      <div class="modal-body">
 
 
 
