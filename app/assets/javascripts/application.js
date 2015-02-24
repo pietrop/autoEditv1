@@ -12,11 +12,11 @@
 //
 //= popcorn-ie8
 //= require jquery
-//= require jquery-ui
 //= require jquery_ujs
+//= require jquery-ui
 //= require jquery.turbolinks
 //= require turbolinks
 //= require bootstrap
-//= require jquery.purr
 //= require best_in_place
+//= require jquery.purr
 //= require_tree .
