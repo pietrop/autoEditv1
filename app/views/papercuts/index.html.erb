@@ -20,7 +20,9 @@
              // $table_to_update =   $tab_items.prevObject.get(2).innerHTML,
              ///////////////GETTING PAPER EDIT NUMBER ID
               pathname = window.location.pathname;
-              $PaperEditID = pathname.match(/\d*/)[0];
+              $PaperEditID = pathname.match(/\d+/)[0];
+              // console.log(pathname);
+              // console.log($PaperEditID);
               //////////////END OF GETTING PAPER EDIT NUMBER ID
               /////////NUMBER OF LINES
               $nOfRows = $tab_items.prevObject.get(2).rows.length -1,
