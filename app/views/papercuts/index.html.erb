@@ -1,4 +1,5 @@
     <script type="text/javascript" charset="utf-8">
+
   $(document).ready(function() {
       $tabs = $(".table");
       $('.tabs a').click(function(e) {
@@ -98,7 +99,7 @@
                 }).done(function(data){
 
                   // when funciton done, returns data, rendered back from the controller.
-                  console.log(data),
+                  // console.log(data)
                   location.reload()//TEMPORARY PATCH Reloads the page so that when changing the order or adding things to the 
                   // paper edit there are no duplacates due to problems with ajax and JQuery that I need to figure out.
                   // opens to the url received in response from the controller.
@@ -126,19 +127,9 @@
           return false;
         }
       });
-      
-  });
 
-  </script>
-
-
-
-<!--  make table searchable -->
-<!-- from http://jsfiddle.net/giorgitbs/52aK9/1/ -->
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function () {
-
-    (function ($) {
+      //table searchable
+        (function ($) {
 
         $('#filter').keyup(function () {
 
@@ -151,19 +142,12 @@ $(document).ready(function () {
         })
 
     }(jQuery));
-
-});
-
-</script>
-
+// best in place
+         jQuery(".best_in_place").best_in_place();
+  });
 
 
-<!-- Best in place inline editing -->
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
-  /* Activating Best In Place */
-  jQuery(".best_in_place").best_in_place();
-});
+
 </script>
 
 <p id="notice"><%= notice %></p>
