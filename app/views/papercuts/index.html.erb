@@ -98,8 +98,8 @@
                 }).done(function(data){
 
                   // when funciton done, returns data, rendered back from the controller.
-                  console.log(data);
-                  location.reload();//TEMPORARY PATCH Reloads the page so that when changing the order or adding things to the 
+                  console.log(data),
+                  location.reload()//TEMPORARY PATCH Reloads the page so that when changing the order or adding things to the 
                   // paper edit there are no duplacates due to problems with ajax and JQuery that I need to figure out.
                   // opens to the url received in response from the controller.
                   // window.location = data;//might not need this
