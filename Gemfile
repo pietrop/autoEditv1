@@ -20,6 +20,8 @@ gem 'rails_12factor', group: :production
 
 gem 'intercom-rails'
 
+gem 'geocoder'
+
 # inline editing 
 # http://railscasts.com/episodes/302-in-place-editing?view=asciicast
 # https://github.com/bernat/best_in_place

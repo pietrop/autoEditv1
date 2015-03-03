@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
 
+  get 'dashboard/index'
+
+  get 'dashboard/show'
+
   devise_for :users
   # resources :paperedits
 
@@ -22,6 +26,9 @@ resources :lines
 
 
 resources :blog
+
+
+resources :dashboard
 
 
 

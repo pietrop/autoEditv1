@@ -1,0 +1,69 @@
+<h1>Dashboard</h1>
+<p>Admin User's Dashboard</p>
+
+
+
+<div class="row">
+<div class="col-6">
+<div class="table-responsive">
+<table class="table table-striped table-hover table-condensed table-responsive">
+  <tr>
+<th> id  </th>
+<th> Name  </th>
+
+<th>Transcripts Count</th>
+<th>Transcripts Lines</th>
+ <th>Paperedits Count</th>
+ <th>Paperedits Lines</th>
+ <th> Address </th>
+
+<th> sign_in_count </th>
+<th> current_sign_in_at </th>
+<th> last_sign_in_at </th>
+
+<th>created_at</th>
+<th>updated_at</th>
+<th> remember_created_at </th>
+<th>admin</th>
+
+
+  </tr>
+
+  <tr>
+<% User.all.each do |u| %>
+  <td><%= u.id %>  </td>
+  <td><%= u.email %>  </td>
+  <td><%= u.transcripts.count %></td>
+  <td><% u.transcripts.map(&:lines).each do |l| %>
+ <%= l.count %><br>
+ <%  end  %></td>
+  <td><%= u.paperedits.count %></td>
+  <td><% u.paperedits.map(&:lines).each do |l| %>
+ <%= l.count %><br>
+ <%  end  %></td>
+    <td><% Geocoder.search(u.last_sign_in_ip).each do |g|%>  
+  
+   <strong>IP</strong>  <%= g.ip %> <br>
+    <strong>City</strong> <%= g.city %><br>
+   <strong>Lat</strong> <%= g.latitude %><br>
+  <strong>Long</strong> <%= g.longitude %><br>
+    <strong>Country Code</strong> <%= g.country_code %><br>
+
+      
+    <% end %>
+   </td>
+   <td><%= u.sign_in_count %>  </td>
+    <td><%= u.current_sign_in_at %>  </td>
+    <td><%= u.last_sign_in_at %>  </td>
+    <td><%= u.created_at %>  </td>
+    <td><%= u.updated_at %>  </td>
+       <td><%= u.remember_created_at %>  </td>
+     <td><%= u.admin %>  </td>
+  
+     
+  </tr>
+<% end %>
+</table>
+</div>
+</div>
+</div>

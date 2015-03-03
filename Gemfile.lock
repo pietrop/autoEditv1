@@ -52,6 +52,7 @@ GEM
       timecode
     erubis (2.7.0)
     execjs (2.3.0)
+    geocoder (1.2.7)
     hike (1.2.3)
     hoe (3.13.1)
       rake (>= 0.8, < 11.0)
@@ -157,6 +158,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   devise
   edl
+  geocoder
   hoe
   intercom-rails
   jbuilder (~> 2.0)
