@@ -56,6 +56,8 @@ GEM
     hoe (3.13.1)
       rake (>= 0.8, < 11.0)
     i18n (0.7.0)
+    intercom-rails (0.2.27)
+      activesupport (> 3.0)
     jbuilder (2.2.8)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
@@ -156,6 +158,7 @@ DEPENDENCIES
   devise
   edl
   hoe
+  intercom-rails
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks

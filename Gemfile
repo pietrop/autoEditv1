@@ -18,6 +18,8 @@ gem 'rails_12factor', group: :production
 # https://github.com/kangguru/rack-google-analytics
 # gem 'rack-google-analytics'
 
+gem 'intercom-rails'
+
 # inline editing 
 # http://railscasts.com/episodes/302-in-place-editing?view=asciicast
 # https://github.com/bernat/best_in_place
