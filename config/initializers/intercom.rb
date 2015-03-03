@@ -7,7 +7,7 @@ IntercomRails.config do |config|
   # This is required to enable secure mode, you can find it on your Intercom
   # "security" configuration page.
   #
- config.api_secret = '09da7e40d80b0e612e9619ba0524447b2c0d1ce1'
+ config.api_secret = 'AAqZd8KTfqOl2e5e9x3Z8Bo1SktZYfRezDQahpRV'
 
  config.user.custom_data = {
     :transcripts => Proc.new { |user| user.transcripts.count },
@@ -20,7 +20,7 @@ IntercomRails.config do |config|
   # This is required for some Intercom rake tasks like importing your users;
   # you can generate one at https://app.intercom.io/apps/api_keys.
   #
-  # config.api_key = "..."
+   config.api_key = "09da7e40d80b0e612e9619ba0524447b2c0d1ce1"
 
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
