@@ -58,6 +58,7 @@ class TranscriptsController < ApplicationController
       if @transcript.save
         format.html { redirect_to @transcript, notice: 'Transcript was successfully created.' }
         format.json { render :show, status: :created, location: @transcript }
+         # intercom_custom_data.user['Created_New_Transcript'] = Time.now
       else
         format.html { render :new }
         format.json { render json: @transcript.errors, status: :unprocessable_entity }
