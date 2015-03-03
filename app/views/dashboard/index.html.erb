@@ -28,9 +28,13 @@
 
 
   </tr>
-
-  <tr>
 <% User.all.each do |u| %>
+  <tr <% if (u.paperedits.count > 0) %>
+    <%= raw("class='info'").html_safe %>
+     <% elsif ((u.transcripts.count > 0) ) %>
+     <%= raw("class='success'").html_safe %>
+    <% end %>
+>
   <td><%= u.id %>  </td>
   <td><%= u.email %>  </td>
   <td><%= u.transcripts.count %></td>
