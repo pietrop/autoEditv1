@@ -11,8 +11,7 @@ IntercomRails.config do |config|
 
  config.user.custom_data = {
     :transcripts => Proc.new { |user| user.transcripts.count },
-    :paperedits => Proc.new { |user| user.paperedits.count },
-     :papercuts_on_last_paper_edit => Proc.new { |user| user.paperedits.last.lines.count }
+    :paperedits => Proc.new { |user| user.paperedits.count }
   }
 
 
